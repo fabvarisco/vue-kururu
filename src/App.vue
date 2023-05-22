@@ -2,13 +2,20 @@
   <main>
     <KururuMusic />
     <div>
+      <HertaSpining />      
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+
       <Herta v-for="kururu in hertaList" :key="kururu.id" :hertaSize="convertSizeToPx(kururu.size)"/>
     </div>
     <div>
       <button class="kururin-button" @click="kururing">KURURU</button>
     </div>
     <div>
-      <Shop />
+      <Shop @buyItem="buyItem"/>
     </div>
     <div>
       <p>Kururu Coins: {{ kururuCoins }} </p>
@@ -21,6 +28,7 @@
 import Herta from './components/Herta.vue';
 import Shop from './components/Shop.vue';
 import KururuMusic from './components/KururuMusic.vue';
+import HertaSpining from './components/HertaSpining.vue';
 </script>
 
 <script lang="ts">
@@ -38,12 +46,18 @@ export default {
       kururuCoins: 0,
       herta: 0,
       hammer: 0,
-      cps: 0
+      cps: 0,
+      emits: ['hertaEvent','hammerEvent']
+
     };
   },
   mounted() {
     	this.startGame()
   },
+  components:{
+    Shop,
+    HertaSpining
+},
   methods: {
     startGame():void{
       setInterval(() => {
@@ -63,6 +77,22 @@ export default {
     convertSizeToPx(size:number):string{
       return size + "px"
     },
+    buyItem(item:any):void{
+      if (this.kururuCoins >= item.price){
+        this.kururuCoins -= item.price;
+          switch(item.name){
+            case "Hammer":
+              this.hammer++;
+              this.cps += item.cps
+            break;
+            case "Herta":
+              this.herta++;
+              this.cps += item.cps
+            break;
+
+          }
+      }
+    },
     kururing(): void {
       this.kururuCoins++
       this.createHerta()
@@ -73,6 +103,7 @@ export default {
 
 <style scoped>
 .kururin-button {
+  z-index: ;
   background: #7b5cad;
   width: 200px;
   height: 48px;

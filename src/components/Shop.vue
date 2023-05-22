@@ -1,6 +1,6 @@
 <template >
   <div class="grid-container">
-    <button style="height: 80px;" v-for="item in items" :key="item.id" class="grid-item" @click="$emit(item.emitName)">
+    <button style="height: 80px;" v-for="item in items" :key="item.id" class="grid-item" @click="$emit('buyItem', { name: item.name, cps: item.cps, price:item.price })" >
       <p>{{ item.name }}</p>
       <p>Price {{ item.price }}</p>
       <p>Cps {{ item.cps }}</p>
@@ -22,7 +22,6 @@
   grid-template-rows: repeat(6, 1fr);
   gap: 10px;
   width: 400px;
-  /* Adjust the width as needed */
   height: 400px;
   background: white;
   left: 70%;
@@ -41,8 +40,8 @@ export default {
       items: [
         { id: 1, name: 'Herta', price: 10, cps: 1, emitName:"hertaEvent", src: "../assets/herta stuff/hammer.png" },
         { id: 2, name: 'Hammer', price: 10, cps: 10,emitName:"hammerEvent",src: "../assets/herta stuff/hammer.png" },
-
-      ]
+      ],
+      emits: ['buyItem']
     };
   }
 };
