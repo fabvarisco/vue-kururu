@@ -64,7 +64,7 @@ export default {
 .herta-container {
     position: fixed;
     top: 63%;
-    left: 40%;
+    left: 45%;
     transform: translate(-50%, -50%);
     scale: .6;
 }
@@ -72,8 +72,8 @@ export default {
 
 
 .herta-position {
-    height: calc(100% - 10px);
     object-fit: contain;
+
 }
 .herta-gif {
     transform: translate(-50%, -60%);

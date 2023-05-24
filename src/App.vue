@@ -1,16 +1,21 @@
 <template>
   <main>
     <!--Game Section-->
+
     <section class="game">
       <div>
         <p>Kururu Coins: {{ kururuCoins }} </p>
         <p>Cps: {{ cps }} </p>
       </div>
-      <Enemy />
-      <Herta @spining="kururing"/>
+
+      <div>
+        <Enemy @shake="kururing"/>
+        <Herta @spining="kururing"/>
+      </div>
+
     </section>
     <section class="shop-container">
-      asasas
+      <Shop @buyItem="buyItem"/>
     </section>
     <!--Shop Section-->
 
@@ -117,7 +122,8 @@ export default {
   z-index: 100;
   width: 100vw;
   height: 30vh;
-  background: red;
+  overflow: auto;
+  ;
 }
 
 .game {
@@ -134,4 +140,6 @@ export default {
   height: 48px;
   border: #392a64 solid 2px;
 }
+
+
 </style>

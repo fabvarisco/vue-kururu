@@ -7,17 +7,39 @@
 <script lang="ts">
 
 export default {
+    name:"Enemy",
+    emits:['shake'],
     data() {
         return {
-            hit: false,
+            shaking: false,
             timeout: 0
         }
     },
     methods: {
+        shake(){
+            
+            let enemy: HTMLElement | null = document.getElementById('enemy-id')
+            enemy?.classList.add("shaking");
 
+            // if (!this.shaking) {
+            //     enemy?.classList.add("shaking");
+            //     if (!this.timeout) {
+            //         this.timeout = setTimeout(() => {
+            //             enemy?.classList.add("shaking");
+            //         }, 1000)
+            //     } else {
+            //         clearTimeout(this.timeout);
+            //         this.timeout = setTimeout(() => {
+            //             enemy?.classList.add("shaking");
+
+            //         }, 1000)
+            //     }
+        //}
 
         }
     }
+}
+    
 
 
 </script>
@@ -28,15 +50,10 @@ export default {
     position: fixed;
     top: 60%;
     left: 50%;
-    transform: translateY(-48%);
+    transform: translateY(-50%);
     scale: 1;
 }
-.herta-position {
-    
-    object-fit: contain;
-}
-
-/* img:hover {
+.shaking:hover {
   animation: shake 0.5s;
 
   animation-iteration-count: infinite;
@@ -54,7 +71,7 @@ export default {
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
-} */
+}
 
 
 </style>
