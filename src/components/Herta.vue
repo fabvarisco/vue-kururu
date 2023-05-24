@@ -1,74 +1,93 @@
-<script setup lang="ts">
-defineProps<{
-    hertaSize: string
-}>()
-</script>
-
 <template>
-    <div class="kururu-container">
-        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-rotation-image" />
+    <div class="herta-container">
+        <button class="herta-button"  @click="HertaSpining()">
+            <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="herta-position herta-gif herta-none" id="herta-gif" />
+            <img src="../assets/herta stuff/herta.png" alt="KURURING!" class="herta-position herta-png herta-block" id="herta-png" />
+        </button>
     </div>
 </template>
 
+<script lang="ts">
 
+export default {
+    name:"Herta",
+    emits:['spining'],
+    data() {
+        return {
+            hertaSpining: false,
+            timeout: 0
+        }
+    },
+    methods: {
+        HertaSpining() {
+            let hertaPng: HTMLElement | null = document.getElementById('herta-png')
+            let hertaGif: HTMLElement | null = document.getElementById('herta-gif')
+            this.$emit('spining')
+            if (!this.hertaSpining) {
+                hertaPng?.classList.add("herta-none");
+
+                hertaGif?.classList.remove("herta-none");
+                hertaGif?.classList.add("herta-block");
+
+
+                if (!this.timeout) {
+                    this.timeout = setTimeout(() => {
+                        hertaGif?.classList.add("herta-none");
+                        hertaGif?.classList.remove("herta-block");
+                        hertaPng?.classList.remove("herta-none");
+                        hertaPng?.classList.add("herta-block");
+                    }, 1000)
+                } else {
+                    clearTimeout(this.timeout);
+                    this.timeout = setTimeout(() => {
+                        hertaGif?.classList.add("herta-none");
+                        hertaGif?.classList.remove("herta-block");
+                        hertaPng?.classList.remove("herta-none");
+                        hertaPng?.classList.add("herta-block");
+                    }, 1000)
+                }
+
+
+            }
+
+
+        }
+    }
+}
+
+</script>
 
 <style scoped>
-.kururu-container {
-    width: 100%;
-    height: 50%;
+.herta-button {
+    all: unset;
 }
-
-.kururu-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    top: 10%;
-    height: v-bind('hertaSize');
+.herta-container {
+    position: fixed;
+    top: 63%;
+    left: 40%;
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear infinite;
+    scale: .6;
 }
 
-.kururu-translate-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    top: 10%;
-    height: v-bind('hertaSize');
+
+
+.herta-position {
+    height: calc(100% - 10px);
+    object-fit: contain;
+}
+.herta-gif {
+    transform: translate(-50%, -60%);
+
+}
+.herta-png {
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear infinite;
-}
-
-.kururu-rotation-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    top: 10%;
-    height: v-bind('hertaSize');
-    transform: translate(-50%, -50%);
-    width: 100px;
-    animation: rotation 3s infinite linear;
 
 }
-
-@keyframes moveImage {
-    0% {
-        left: 0;
-    }
-
-    100% {
-        left: calc(90% - 100px);
-    }
+.herta-block {
+    display: block;
 }
 
-@keyframes rotation {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-        left: 0;
-    }
-
-    100% {
-        transform: translate(-1rem, -5rem) rotate(359deg);
-        left: calc(90% - 100px);
-    }
+.herta-none {
+    display: none;
 }
 </style>
