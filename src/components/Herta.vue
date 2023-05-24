@@ -1,17 +1,23 @@
+<script setup lang="ts">
+defineExpose({
+    HertaSpining,
+});
+</script>
+
 <template>
     <div class="herta-container">
-        <button class="herta-button"  @click="HertaSpining()">
-            <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="herta-position herta-gif herta-none" id="herta-gif" />
-            <img src="../assets/herta stuff/herta.png" alt="KURURING!" class="herta-position herta-png herta-block" id="herta-png" />
-        </button>
+        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="herta-position herta-gif herta-none"
+            id="herta-gif" />
+        <img src="../assets/herta stuff/herta.png" alt="KURURING!" class="herta-position herta-png herta-block"
+            id="herta-png" />
     </div>
 </template>
 
 <script lang="ts">
 
 export default {
-    name:"Herta",
-    emits:['spining'],
+    name: "Herta",
+    emits: ['spiningEvent'],
     data() {
         return {
             hertaSpining: false,
@@ -22,7 +28,7 @@ export default {
         HertaSpining() {
             let hertaPng: HTMLElement | null = document.getElementById('herta-png')
             let hertaGif: HTMLElement | null = document.getElementById('herta-gif')
-            this.$emit('spining')
+
             if (!this.hertaSpining) {
                 hertaPng?.classList.add("herta-none");
 
@@ -61,6 +67,7 @@ export default {
 .herta-button {
     all: unset;
 }
+
 .herta-container {
     position: fixed;
     top: 63%;
@@ -75,14 +82,17 @@ export default {
     object-fit: contain;
 
 }
+
 .herta-gif {
     transform: translate(-50%, -60%);
 
 }
+
 .herta-png {
     transform: translate(-50%, -50%);
 
 }
+
 .herta-block {
     display: block;
 }

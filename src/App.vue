@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import Herta from './components/Herta.vue';
+import Shop from './components/Shop.vue';
+import KururuMusic from './components/KururuMusic.vue';
+import HertaSpining from './components/HertaSpining.vue';
+import Enemy from './components/Enemy.vue';
+
+const myChild = ref(null);
+
+function testCall() {
+  myChild.value.childMethod();
+}
+
+</script>
+
 <template>
   <main>
     <!--Game Section-->
@@ -8,42 +23,36 @@
         <p>Cps: {{ cps }} </p>
       </div>
 
+    <div @click="kururing()">
+      <Enemy @shakingEvent="" />
+      <Herta />
+    </div>
+
+  </section>
+  <section class="shop-container">
+    <Shop @buyItem="buyItem" />
+  </section>
+  <!--Shop Section-->
+
+
+  <!--     
       <div>
-        <Enemy @shake="kururing"/>
-        <Herta @spining="kururing"/>
+        <Herta v-for="kururu in hertaList" :key="kururu.id" :hertaSize="convertSizeToPx(kururu.size)"/>
       </div>
-
-    </section>
-    <section class="shop-container">
-      <Shop @buyItem="buyItem"/>
-    </section>
-    <!--Shop Section-->
-
-
-    <!--     
-    <div>
-      <Herta v-for="kururu in hertaList" :key="kururu.id" :hertaSize="convertSizeToPx(kururu.size)"/>
-    </div>
-    <div>
-      <button class="kururin-button" @click="kururing">KURURU</button>
-    </div>
-    <div>
-      <Shop @buyItem="buyItem"/>
-    </div>
-    <div>
-      <p>Kururu Coins: {{ kururuCoins }} </p>
-      <p>Cps: {{ cps }} </p>
-    </div> -->
+      <div>
+        <button class="kururin-button" @click="kururing">KURURU</button>
+      </div>
+      <div>
+        <Shop @buyItem="buyItem"/>
+      </div>
+      <div>
+        <p>Kururu Coins: {{ kururuCoins }} </p>
+        <p>Cps: {{ cps }} </p>
+      </div> -->
   </main>
 </template>
 
-<script setup lang="ts">
-import Herta from './components/Herta.vue';
-import Shop from './components/Shop.vue';
-import KururuMusic from './components/KururuMusic.vue';
-import HertaSpining from './components/HertaSpining.vue';
-import Enemy from './components/Enemy.vue';
-</script>
+
 
 <script lang="ts">
 interface IHertaComponent {
@@ -61,7 +70,7 @@ export default {
       herta: 0,
       hammer: 0,
       cps: 0,
-      emits: ['hertaEvent', 'hammerEvent']
+      emits: ['hertaEvent', 'hammerEvent', 'shakingEvent', 'spiningEvent']
 
     };
   },
@@ -110,7 +119,12 @@ export default {
     },
     kururing(): void {
       this.kururuCoins++
-      this.createHerta()
+      this.$emit('shakingEvent');
+      this.$emit('spiningEvent');
+      //this.createHerta()
+    },
+    test() {
+      alert("adssadsd")
     }
   },
 };
@@ -140,6 +154,4 @@ export default {
   height: 48px;
   border: #392a64 solid 2px;
 }
-
-
 </style>

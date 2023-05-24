@@ -8,7 +8,7 @@
 
 export default {
     name:"Enemy",
-    emits:['shake'],
+    emits:['shakingEvent'],
     data() {
         return {
             shaking: false,
