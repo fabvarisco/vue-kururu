@@ -4,51 +4,91 @@ import Shop from './components/Shop.vue';
 import KururuMusic from './components/KururuMusic.vue';
 import HertaSpining from './components/HertaSpining.vue';
 import Enemy from './components/Enemy.vue';
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 
-const myChild = ref(null);
+const kururuCoins = ref<number>(0)
+const cps = ref<number>(1)
 
-function testCall() {
-  myChild.value.childMethod();
+//Inventory 
+const hammer = ref<number>(0)
+const herta = ref<number>(0)
+const hertaList = ref<IHertaComponent[]>([])
+
+let coins = 0;
+
+
+
+function buyItem(item: any): void {
+  if (kururuCoins.value >= item.price) {
+    kururuCoins.value -= item.price;
+    switch (item.name) {
+      case "Hammer":
+        hammer.value++;
+        cps.value += item.cps
+        break;
+      case "Herta":
+        herta.value++;
+        cps.value += item.cps
+        break;
+
+    }
+  }
 }
+function convertSizeToPx(size: number): string {
+  return size + "px"
+}
+
+function createHerta(): void {
+  const newHerta: IHertaComponent = { id: "0", name: "kururu", size: 100, rotation: false };
+  hertaList.value.push(newHerta);
+  setTimeout(() => {
+    const index = hertaList.value.findIndex(item => item.id === newHerta.id);
+    if (index !== -1) {
+      hertaList.value.splice(index, 1);
+    }
+  }, 3000);
+}
+
+
+function kururing(): void {
+  kururuCoins.value++
+  //createHerta()
+  // this.$emit('shakingEvent');
+  // this.$emit('spiningEvent');
+
+}
+
+
+onMounted(() => {
+  coins = setInterval(() => {
+    kururuCoins.value += cps.value;
+  }, 1000);
+})
+
+onUnmounted(() => clearInterval(coins))
+
 
 </script>
 
 <template>
   <main>
     <!--Game Section-->
-
     <section class="game">
-      <div>
+      <div class="kurukuru-coins">
         <p>Kururu Coins: {{ kururuCoins }} </p>
         <p>Cps: {{ cps }} </p>
       </div>
 
-    <div @click="kururing()">
-      <Enemy @shakingEvent="" />
-      <Herta />
-    </div>
-
-  </section>
-  <section class="shop-container">
-    <Shop @buyItem="buyItem" />
-  </section>
-  <!--Shop Section-->
-
-
-  <!--     
-      <div>
-        <Herta v-for="kururu in hertaList" :key="kururu.id" :hertaSize="convertSizeToPx(kururu.size)"/>
+      <div @click="kururing()">
+        <Enemy @shakingEvent="" />
+        <Herta ref="refHerta" />
       </div>
-      <div>
-        <button class="kururin-button" @click="kururing">KURURU</button>
-      </div>
-      <div>
-        <Shop @buyItem="buyItem"/>
-      </div>
-      <div>
-        <p>Kururu Coins: {{ kururuCoins }} </p>
-        <p>Cps: {{ cps }} </p>
-      </div> -->
+
+    </section>
+    <!--Shop Section-->
+    <section class="shop-container">
+      <Shop @buyItem="buyItem" />
+    </section>
   </main>
 </template>
 
@@ -63,6 +103,11 @@ interface IHertaComponent {
 }
 
 export default {
+  components: {
+    Shop,
+    HertaSpining,
+    Enemy,
+  },
   data() {
     return {
       hertaList: [] as IHertaComponent[],
@@ -74,63 +119,19 @@ export default {
 
     };
   },
-  mounted() {
-    this.startGame()
-  },
-  components: {
-    Shop,
-    HertaSpining,
-    Enemy
-  },
   methods: {
-    startGame(): void {
-      setInterval(() => {
-        this.kururuCoins += this.cps;
-      }, 1000);
-    },
-    createHerta(): void {
-      const newHerta: IHertaComponent = { id: "0", name: "kururu", size: 100, rotation: false };
-      this.hertaList.push(newHerta);
-      setTimeout(() => {
-        const index = this.hertaList.findIndex(item => item.id === newHerta.id);
-        if (index !== -1) {
-          this.hertaList.splice(index, 1);
-        }
-      }, 3000);
-    },
-    convertSizeToPx(size: number): string {
-      return size + "px"
-    },
-    buyItem(item: any): void {
-      if (this.kururuCoins >= item.price) {
-        this.kururuCoins -= item.price;
-        switch (item.name) {
-          case "Hammer":
-            this.hammer++;
-            this.cps += item.cps
-            break;
-          case "Herta":
-            this.herta++;
-            this.cps += item.cps
-            break;
 
-        }
-      }
-    },
-    kururing(): void {
-      this.kururuCoins++
-      this.$emit('shakingEvent');
-      this.$emit('spiningEvent');
-      //this.createHerta()
-    },
-    test() {
-      alert("adssadsd")
-    }
   },
 };
 </script>
 
 <style scoped>
+.kurukuru-coins {
+  color: white;
+  text-align: center;
+  font-size: 57px;
+}
+
 .shop-container {
   position: relative;
   z-index: 100;

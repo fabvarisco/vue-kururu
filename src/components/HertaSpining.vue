@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-    <span><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
+    <span style="position: absolute;"><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
 </template>
 
 
