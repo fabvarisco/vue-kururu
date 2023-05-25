@@ -4,7 +4,7 @@ import Shop from './components/Shop.vue';
 import KururuMusic from './components/KururuMusic.vue';
 import HertaSpining from './components/HertaSpining.vue';
 import Enemy from './components/Enemy.vue';
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
@@ -15,8 +15,6 @@ const herta = ref<number>(0)
 const hertaList = ref<IHertaComponent[]>([])
 
 let coins = 0;
-
-
 
 function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
@@ -53,11 +51,7 @@ function createHerta(): void {
 function kururing(): void {
   kururuCoins.value++
   //createHerta()
-  // this.$emit('shakingEvent');
-  // this.$emit('spiningEvent');
-
 }
-
 
 onMounted(() => {
   coins = setInterval(() => {
@@ -66,7 +60,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => clearInterval(coins))
-
 
 </script>
 
@@ -80,8 +73,8 @@ onUnmounted(() => clearInterval(coins))
       </div>
 
       <div @click="kururing()">
-        <Enemy @shakingEvent="" />
-        <Herta ref="refHerta" />
+        <Enemy />
+        <Herta />
       </div>
 
     </section>
@@ -105,8 +98,8 @@ interface IHertaComponent {
 export default {
   components: {
     Shop,
-    HertaSpining,
     Enemy,
+    Herta,
   },
   data() {
     return {

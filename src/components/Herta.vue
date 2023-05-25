@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const hertaAttack = ref<boolean>(false)
 const timeout = ref<any>(0)
 
 function HertaSpining() {
-    let hertaPng: HTMLElement | null = document.getElementById('herta-png')
-    let hertaGif: HTMLElement | null = document.getElementById('herta-gif')
+    const hertaPng: HTMLElement | null = document.getElementById('herta-png')
+    const hertaGif: HTMLElement | null = document.getElementById('herta-gif')
 
     if (!hertaAttack.value) {
         hertaPng?.classList.add("herta-none");
@@ -14,8 +14,7 @@ function HertaSpining() {
         hertaGif?.classList.remove("herta-none");
         hertaGif?.classList.add("herta-block");
 
-
-        if (!timeout) {
+        if (!timeout.value) {
             timeout.value = setTimeout(() => {
                 hertaGif?.classList.add("herta-none");
                 hertaGif?.classList.remove("herta-block");
@@ -31,24 +30,26 @@ function HertaSpining() {
                 hertaPng?.classList.add("herta-block");
             }, 1000)
         }
-
-
     }
-
-
 }
+
+watchEffect(() => {
+    if (hertaAttack.value) {
+        HertaSpining();
+    }
+})
+
+
 </script>
 
 <template>
-    <div class="herta-container" @click="HertaSpining()">
+    <div class="herta-container">
         <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="herta-position herta-gif herta-none"
             id="herta-gif" />
         <img src="../assets/herta stuff/herta.png" alt="KURURING!" class="herta-position herta-png herta-block"
             id="herta-png" />
     </div>
 </template>
-
-
 
 <style scoped>
 .herta-button {
@@ -63,21 +64,16 @@ function HertaSpining() {
     scale: .6;
 }
 
-
-
 .herta-position {
     object-fit: contain;
-
 }
 
 .herta-gif {
     transform: translate(-50%, -60%);
-
 }
 
 .herta-png {
     transform: translate(-50%, -50%);
-
 }
 
 .herta-block {

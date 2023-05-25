@@ -1,30 +1,26 @@
-<script lang="ts">
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
 
-export default {
-    data(){
-        return {
-            size:"",
-            position:{x:"",y:""}
-        }
-    },
-    created(){
-        this.size = Math.random() * 200 + "px"
-        this.position.y = Math.random() * window.innerHeight + "px"
-        this.position.x = Math.random() * window.innerWidth  + "px"
-    }
-}
+const size = ref<string>("");
+const position = ref<{ x: string, y: string }>({ x: "", y: "" });
+
+
+onMounted(() => {
+    size.value = Math.random() * 200 + "px";
+    position.value.x = Math.random() * window.innerHeight + "px";
+    position.value.x = Math.random() * window.innerWidth + "px";
+})
 
 </script>
 
 <template>
-    <span style="position: absolute;"><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
+    <span><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
 </template>
 
 
 
 <style scoped>
-
-.kururu-spining{
+.kururu-spining {
     pointer-events: none;
     position: absolute;
     width: v-bind('size');

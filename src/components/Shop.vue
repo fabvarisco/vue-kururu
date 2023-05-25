@@ -1,7 +1,34 @@
+<script setup lang="ts">
+
+const items = [
+  { id: 1, name: 'Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+]
+const upgrades = [
+  { id: 1, name: 'Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+]
+
+defineEmits(['buyItem'])
+
+</script>
+
 <template >
   <div class="shop-container">
     <div class="grid-container">
-      <button style="height: 120px;" v-for="item in items" :key="item.id" class="grid-item"
+      <button style="height: 112px;" v-for="item in items" :key="item.id" class="grid-item"
         @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
         <p>{{ item.name }}</p>
         <p>Price {{ item.price }}</p>
@@ -10,7 +37,15 @@
       </button>
     </div>
     <div style="position: sticky; top: 0;">
-        asdasddas
+      <div class="grid-container">
+        <button style="height: 112px;" v-for="item in upgrades" :key="item.id" class="grid-item"
+          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
+          <p>{{ item.name }}</p>
+          <p>Price {{ item.price }}</p>
+          <p>Cps {{ item.cps }}</p>
+          <img class="image-size" src="../assets/herta stuff/hammer.png" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -36,36 +71,19 @@
 .shop-container {
   background: cadetblue;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columns */
-  grid-gap: 20px; /* Gap between grid items */
+  grid-template-columns: 1fr 1fr;
+  /* 2 columns */
+  grid-gap: 20px;
+  /* Gap between grid items */
 }
 
 @media (max-width: 767px) {
   .shop-container {
-    grid-template-columns: 1fr; /* 1 column */
-    grid-template-rows: 1fr 1fr; /* 2 rows */
+    grid-template-columns: 1fr;
+    /* 1 column */
+    grid-template-rows: 1fr 1fr;
+    /* 2 rows */
   }
 }
-
 </style>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      items: [
-        { id: 1, name: 'Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-        { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-
-      ],
-      emits: ['buyItem']
-    };
-  }
-};
-</script>

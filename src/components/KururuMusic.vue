@@ -1,30 +1,24 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const disableAudio = ref<boolean>(false);
+
+function ToggleMusic() {
+    const player: HTMLMediaElement = document.getElementById('audio') as HTMLMediaElement;
+    disableAudio.value = !disableAudio.value
+
+    if (disableAudio.value) {
+        player.pause()
+    } else {
+        player.play()
+    }
+}
+</script>
+
 <template>
     <audio ref="audio" autoplay="true" src="src/assets/audios/kururing_music.mp3" loop id="audio" hidden></audio>
     <button @click="ToggleMusic()">Toggle audio</button>
 </template>
-
-<script lang="ts">
-export default {
-    data() {
-        return {
-            disableAudio: false
-        }
-    },
-    methods: {
-        ToggleMusic(){
-            const player:HTMLMediaElement = document.getElementById('audio') as HTMLMediaElement;
-            this.disableAudio = !this.disableAudio
-            
-            if (this.disableAudio) {
-                player.pause()
-            }else{
-                player.play()
-            }
-        }
-    }
-}
-
-</script>
 
 <style scoped>
 .kururu-container {
