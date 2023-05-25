@@ -12,10 +12,11 @@ interface IHertaComponent {
   size: number;
   rotation: boolean;
 }
-  
+
 
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
+const dps = ref<number>(1)
 
 //Inventory 
 const hammer = ref<number>(0)
@@ -77,7 +78,10 @@ onUnmounted(() => clearInterval(coins))
     <section class="game">
       <div class="kurukuru-coins">
         <p>Kururu Coins: {{ kururuCoins }} </p>
-        <p>Cps: {{ cps }} </p>
+        <div style="display: flex; justify-content: center; font-size: 28px;">
+          <p style="padding:16px">Cps: {{ cps }} </p>
+          <p style="padding:16px">Dps: {{ dps }} </p>
+        </div>
       </div>
 
       <div @click="kururing()">
