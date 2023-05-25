@@ -6,6 +6,14 @@ import HertaSpining from './components/HertaSpining.vue';
 import Enemy from './components/Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
 
+interface IHertaComponent {
+  id: string;
+  name: string;
+  size: number;
+  rotation: boolean;
+}
+  
+
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
 
@@ -47,10 +55,10 @@ function createHerta(): void {
   }, 3000);
 }
 
-
 function kururing(): void {
   kururuCoins.value++
   //createHerta()
+
 }
 
 onMounted(() => {
@@ -85,38 +93,6 @@ onUnmounted(() => clearInterval(coins))
   </main>
 </template>
 
-
-
-<script lang="ts">
-interface IHertaComponent {
-  id: string;
-  name: string;
-  size: number;
-  rotation: boolean;
-}
-
-export default {
-  components: {
-    Shop,
-    Enemy,
-    Herta,
-  },
-  data() {
-    return {
-      hertaList: [] as IHertaComponent[],
-      kururuCoins: 0,
-      herta: 0,
-      hammer: 0,
-      cps: 0,
-      emits: ['hertaEvent', 'hammerEvent', 'shakingEvent', 'spiningEvent']
-
-    };
-  },
-  methods: {
-
-  },
-};
-</script>
 
 <style scoped>
 .kurukuru-coins {
