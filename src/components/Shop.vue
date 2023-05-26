@@ -86,7 +86,7 @@ defineEmits(['buyItem'])
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* 2 columns */
-  grid-gap: 20px;
+  grid-gap: 10px;
   /* Gap between grid items */
 }
 
@@ -94,7 +94,7 @@ defineEmits(['buyItem'])
   .shop-container {
     grid-template-columns: 1fr;
     /* 1 column */
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     /* 2 rows */
   }
 }

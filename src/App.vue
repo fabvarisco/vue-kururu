@@ -59,8 +59,10 @@ function createHerta(): void {
 function kururing(): void {
   kururuCoins.value++
   //createHerta()
-
 }
+
+
+
 
 onMounted(() => {
   coins = setInterval(() => {
@@ -86,7 +88,7 @@ onUnmounted(() => clearInterval(coins))
 
       <div @click="kururing()">
         <Enemy />
-        <Herta />
+        <Herta :value="false"/>
       </div>
 
     </section>

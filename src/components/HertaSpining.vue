@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 
 const size = ref<string>("");
-const position = ref<{ x: string, y: string }>({ x: "", y: "" });
+const position = reactive<{ x: string, y: string }>({ x: "", y: "" });
 
 
 onMounted(() => {
     size.value = Math.random() * 200 + "px";
-    position.value.x = Math.random() * window.innerHeight + "px";
-    position.value.x = Math.random() * window.innerWidth + "px";
+    position.x = Math.random() * window.innerHeight + "px";
+    position.x = Math.random() * window.innerWidth + "px";
 })
 
 </script>

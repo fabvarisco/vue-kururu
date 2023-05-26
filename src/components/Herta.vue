@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, defineProps, watch } from 'vue';
 
 const hertaAttack = ref<boolean>(false)
 const timeout = ref<any>(0)
@@ -33,13 +33,16 @@ function HertaSpining() {
     }
 }
 
-watchEffect(() => {
-    if (hertaAttack.value) {
-        HertaSpining();
-    }
+const prop = defineProps({
+  value: { default: '', type: [String, Number] },
 })
 
-
+watch(
+  () => prop.value,
+  () => {
+    console.log('prop value changed', prop.value)
+  }
+)
 </script>
 
 <template>
