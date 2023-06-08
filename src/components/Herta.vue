@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { ref, watchEffect, defineProps, watch } from 'vue';
 
-const hertaAttack = ref<boolean>(false)
 const timeout = ref<any>(0)
+
+const props = defineProps({
+  value: { type: Boolean, required: true, default: false },
+})
+
+
 
 function HertaSpining() {
     const hertaPng: HTMLElement | null = document.getElementById('herta-png')
     const hertaGif: HTMLElement | null = document.getElementById('herta-gif')
 
-    if (!hertaAttack.value) {
+    if (props.value) {
         hertaPng?.classList.add("herta-none");
 
         hertaGif?.classList.remove("herta-none");
@@ -30,17 +35,18 @@ function HertaSpining() {
                 hertaPng?.classList.add("herta-block");
             }, 1000)
         }
+
+        
     }
 }
 
-const prop = defineProps({
-  value: { default: '', type: [String, Number] },
-})
 
 watch(
-  () => prop.value,
+  () => props.value,
   () => {
-    console.log('prop value changed', prop.value)
+    HertaSpining()
+    console.log('prop value changed', props.value)
+    
   }
 )
 </script>

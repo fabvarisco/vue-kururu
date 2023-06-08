@@ -17,6 +17,7 @@ interface IHertaComponent {
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
 const dps = ref<number>(1)
+const hertaAttack = ref<boolean>(false)
 
 //Inventory 
 const hammer = ref<number>(0)
@@ -58,11 +59,9 @@ function createHerta(): void {
 
 function kururing(): void {
   kururuCoins.value++
+  hertaAttack.value = true
   //createHerta()
 }
-
-
-
 
 onMounted(() => {
   coins = setInterval(() => {
@@ -88,7 +87,7 @@ onUnmounted(() => clearInterval(coins))
 
       <div @click="kururing()">
         <Enemy />
-        <Herta :value="false"/>
+        <Herta :value="hertaAttack"/>
       </div>
 
     </section>
