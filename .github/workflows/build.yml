@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Build Verification
 
 on:
@@ -28,3 +25,29 @@ jobs:
 
       - name: Verify build success
         run: npm run verify-build
+
+      - name: Check build status and lock merge
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: checks } = await github.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              status: 'completed',
+            });
+
+            const buildCheck = checks.check_runs.find((check) => check.name === 'Build project');
+            if (buildCheck && buildCheck.conclusion === 'success') {
+              console.log('Build passed. Allowing merge.');
+            } else {
+              console.log('Build failed. Blocking merge.');
+              github.pullRequests.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                state: 'closed',
+              });
+              core.setFailed('Build failed. Merge is blocked.');
+            }
