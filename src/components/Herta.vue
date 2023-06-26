@@ -49,8 +49,6 @@ watch(
   () => props.value,
   () => {
     HertaSpining()
-    console.log('prop value changed', props.value)
-    
   }
 )
 </script>
