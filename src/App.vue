@@ -42,6 +42,10 @@ function buyItem(item: any): void {
     }
   }
 }
+
+function hertaReset(): void {
+  hertaAttack.value = false;
+}
 function convertSizeToPx(size: number): string {
   return size + "px"
 }
@@ -87,7 +91,7 @@ onUnmounted(() => clearInterval(coins))
 
       <div @click="kururing()">
         <Enemy />
-        <Herta :value="hertaAttack"/>
+        <Herta :value="hertaAttack" @hertaReset="hertaReset"/>
       </div>
 
     </section>

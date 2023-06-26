@@ -7,13 +7,16 @@ const props = defineProps({
   value: { type: Boolean, required: true, default: false },
 })
 
+const spining = ref<boolean>(props.value);
+
+const emit = defineEmits(['hertaReset'])
 
 
 function HertaSpining() {
     const hertaPng: HTMLElement | null = document.getElementById('herta-png')
     const hertaGif: HTMLElement | null = document.getElementById('herta-gif')
 
-    if (props.value) {
+    if (spining) {
         hertaPng?.classList.add("herta-none");
 
         hertaGif?.classList.remove("herta-none");
@@ -35,7 +38,8 @@ function HertaSpining() {
                 hertaPng?.classList.add("herta-block");
             }, 1000)
         }
-
+        spining.value = false;
+        emit('hertaReset')
         
     }
 }
