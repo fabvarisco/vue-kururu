@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { ref, watchEffect, defineProps, watch } from 'vue';
-
-const timeout = ref<any>(0)
+import { ref, watch } from 'vue';
 
 const props = defineProps({
-  value: { type: Boolean, required: true, default: false },
+    value: { type: Boolean, required: true, default: false },
 })
 
+const timeout = ref<any>(0)
 const spining = ref<boolean>(props.value);
 
 const emit = defineEmits(['hertaReset'])
-
 
 function HertaSpining() {
     const hertaPng: HTMLElement | null = document.getElementById('herta-png')
@@ -39,8 +37,7 @@ function HertaSpining() {
             }, 1000)
         }
         spining.value = false;
-        emit('hertaReset')
-        
+        emit('hertaReset');
     }
 }
 

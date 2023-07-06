@@ -18,6 +18,7 @@ const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
 const dps = ref<number>(1)
 const hertaAttack = ref<boolean>(false)
+const shaking = ref<boolean>(false)
 
 //Inventory 
 const hammer = ref<number>(0)
@@ -46,6 +47,10 @@ function buyItem(item: any): void {
 function hertaReset(): void {
   hertaAttack.value = false;
 }
+function shakeReset(): void {
+  shaking.value = false;
+
+}
 function convertSizeToPx(size: number): string {
   return size + "px"
 }
@@ -64,6 +69,7 @@ function createHerta(): void {
 function kururing(): void {
   kururuCoins.value++
   hertaAttack.value = true
+  shaking.value = true
   //createHerta()
 }
 
@@ -90,7 +96,7 @@ onUnmounted(() => clearInterval(coins))
       </div>
 
       <div @click="kururing()">
-        <Enemy />
+        <Enemy :value="shaking" @shakeReset="shakeReset" />
         <Herta :value="hertaAttack" @hertaReset="hertaReset"/>
       </div>
 

@@ -1,35 +1,48 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
-const shaking = ref<boolean>(false);
-const timeout = ref<number>(0);
+const props = defineProps({
+    value: { type: Boolean, required: true, default: false },
+})
 
-function shake() {
+const shaking = ref<boolean>(props.value);
+const timeout = ref<any>(0);
 
-    let enemy: HTMLElement | null = document.getElementById('enemy-id')
-    enemy?.classList.add("shaking");
+const emit = defineEmits(['shakeReset'])
 
-    // if (!this.shaking) {
-    //     enemy?.classList.add("shaking");
-    //     if (!this.timeout) {
-    //         this.timeout = setTimeout(() => {
-    //             enemy?.classList.add("shaking");
-    //         }, 1000)
-    //     } else {
-    //         clearTimeout(this.timeout);
-    //         this.timeout = setTimeout(() => {
-    //             enemy?.classList.add("shaking");
+function Shake() {
+    const enemy: HTMLElement | null = document.getElementById('enemy-id')
 
-    //         }, 1000)
-    //     }
-    //}
-
+    if (shaking) {
+        enemy?.classList.add("shaking");
+        if (!timeout) {
+            timeout.value = setTimeout(() => {
+                enemy?.classList.remove("shaking");
+            }, 1000)
+        } else {
+            clearTimeout(timeout.value);
+            timeout.value = setTimeout(() => {
+                enemy?.classList.remove("shaking");
+            }, 1000)
+        }
+        
+        shaking.value = false;
+        emit('shakeReset');
+    }
 }
+
+watch(
+    () => props.value,
+    () => {
+        Shake()
+    }
+)
+
 </script>
 
 <template>
     <div class="enemy-container">
-        <img src="../assets/enemies/enemy_example.png" alt="ENEMY" class="enemy-position " id="enemy-id" />
+        <img src="../assets/enemies/enemy_example.png" alt="ENEMY" class="enemy-position" id="enemy-id" />
     </div>
 </template>
 
@@ -42,10 +55,8 @@ function shake() {
     scale: 1;
 }
 
-.shaking:hover {
-    animation: shake 0.5s;
-
-    animation-iteration-count: infinite;
+.shaking {
+    animation: shake 0.5s infinite;
 }
 
 @keyframes shake {
