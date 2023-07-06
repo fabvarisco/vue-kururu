@@ -5,6 +5,7 @@ import KururuMusic from './components/KururuMusic.vue';
 import HertaSpining from './components/HertaSpining.vue';
 import Enemy from './components/Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
+import FloatingText  from "./components/FloatingText.vue";
 
 interface IHertaComponent {
   id: string;
@@ -20,10 +21,12 @@ const dps = ref<number>(1)
 const hertaAttack = ref<boolean>(false)
 const shaking = ref<boolean>(false)
 
+
 //Inventory 
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
 const hertaList = ref<IHertaComponent[]>([])
+const floatTextList = ref<number[]>([])
 
 let coins = 0;
 
@@ -66,6 +69,17 @@ function createHerta(): void {
   }, 3000);
 }
 
+function createFloatingText(): void {
+  const newHerta: IHertaComponent = { id: "0", name: "kururu", size: 100, rotation: false };
+  hertaList.value.push(newHerta);
+  setTimeout(() => {
+    const index = hertaList.value.findIndex(item => item.id === newHerta.id);
+    if (index !== -1) {
+      hertaList.value.splice(index, 1);
+    }
+  }, 3000);
+}
+
 function kururing(): void {
   kururuCoins.value++
   hertaAttack.value = true
@@ -91,8 +105,14 @@ onUnmounted(() => clearInterval(coins))
         <p>Kururu Coins: {{ kururuCoins }} </p>
         <div style="display: flex; justify-content: center; font-size: 28px;">
           <p style="padding:16px">Cps: {{ cps }} </p>
+          <p style="padding:16px">Idle Dps: {{ dps }} </p>
           <p style="padding:16px">Dps: {{ dps }} </p>
         </div>
+      </div>
+
+
+      <div v-for="text in floatTextList">
+        <FloatingText :is="text" :key="text.name" />
       </div>
 
       <div @click="kururing()">

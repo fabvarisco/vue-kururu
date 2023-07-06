@@ -7,9 +7,6 @@ function getRandomColor() {
   }
   return color;
 }
-
-const value:string = document?.getElementById('floating-text')?.style?.color = getRandomColor();
-
 </script>
 
 <template>
@@ -19,31 +16,22 @@ const value:string = document?.getElementById('floating-text')?.style?.color = g
 </template>
 
 <style scoped>
-#floating-text-container {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  border: 1px solid black;
-  overflow: hidden;
-}
+
 
 #floating-text {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  animation: floatAnimation 5s infinite;
+  transform: translateY(-50%);
+  animation: floatAnimation 1s infinite;
 }
 
 @keyframes floatAnimation {
   0% {
-    transform: translate(-50%, -50%);
-  }
-  50% {
-    transform: translate(-50%, -150%);
+    transform: translateY(-50%);
   }
   100% {
-    transform: translate(-50%, -50%);
+    transform: translateY(-300%);
   }
 }
 
