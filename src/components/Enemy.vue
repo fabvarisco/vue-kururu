@@ -12,7 +12,6 @@ const emit = defineEmits(['shakeReset'])
 
 function Shake() {
     const enemy: HTMLElement | null = document.getElementById('enemy-id')
-
     if (shaking) {
         enemy?.classList.add("shaking");
         if (!timeout) {
@@ -25,7 +24,6 @@ function Shake() {
                 enemy?.classList.remove("shaking");
             }, 1000)
         }
-        
         shaking.value = false;
         emit('shakeReset');
     }
