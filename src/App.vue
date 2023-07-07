@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import uuid4 from 'uuid4';
 import Herta from './components/Herta.vue';
 import Shop from './components/Shop.vue';
 import KururuMusic from './components/KururuMusic.vue';
 import HertaSpining from './components/HertaSpining.vue';
 import Enemy from './components/Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
-import FloatingText  from "./components/FloatingText.vue";
+import FloatingText from "./components/FloatingText.vue";
 
 interface IHertaComponent {
   id: string;
@@ -13,7 +14,6 @@ interface IHertaComponent {
   size: number;
   rotation: boolean;
 }
-
 
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
@@ -26,9 +26,11 @@ const shaking = ref<boolean>(false)
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
 const hertaList = ref<IHertaComponent[]>([])
-const floatTextList = ref<number[]>([])
+const floatTextList = ref<string[]>([])
+const floatingTextTimeout = ref<any>(0)
 
-let coins = 0;
+
+let coinsInterval = 0;
 
 function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
@@ -80,20 +82,35 @@ function createFloatingText(): void {
   }, 3000);
 }
 
+
+
+function removeText(id:string): void {
+   setTimeout(() => {
+      const index = floatTextList.value.findIndex(el => el === id);
+    if (index !== -1) {
+      floatTextList.value.splice(index, 1);
+    }
+    }, 1000);
+  
+}
+
+
 function kururing(): void {
   kururuCoins.value++
   hertaAttack.value = true
   shaking.value = true
+  const floatTextId: string = uuid4()
+  floatTextList.value.push(floatTextId);
   //createHerta()
 }
 
 onMounted(() => {
-  coins = setInterval(() => {
+  coinsInterval = setInterval(() => {
     kururuCoins.value += cps.value;
   }, 1000);
 })
 
-onUnmounted(() => clearInterval(coins))
+onUnmounted(() => clearInterval(coinsInterval))
 
 </script>
 
@@ -110,16 +127,16 @@ onUnmounted(() => clearInterval(coins))
         </div>
       </div>
 
-
-      <div v-for="text in floatTextList">
-        <FloatingText :is="text" :key="text.name" />
+      <!--Floating Text-->
+      <div v-for="id in floatTextList">
+        <FloatingText :is="id" :id="id" :key="id" @remove-text="removeText"/>
       </div>
 
+      <!-- KURURU -->
       <div @click="kururing()">
         <Enemy :value="shaking" @shakeReset="shakeReset" />
-        <Herta :value="hertaAttack" @hertaReset="hertaReset"/>
+        <Herta :value="hertaAttack" @hertaReset="hertaReset" />
       </div>
-
     </section>
     <!--Shop Section-->
     <section class="shop-container">
