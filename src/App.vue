@@ -206,7 +206,7 @@ onUnmounted(() => clearInterval(coinsInterval))
   color: #392a64;
   font-weight: bold;
   -webkit-text-fill-color: #392a64; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: white;
   animation: floatText 2s linear;
 }
