@@ -20,8 +20,9 @@ const cps = ref<number>(1)
 const dps = ref<number>(1)
 const hertaAttack = ref<boolean>(false)
 const shaking = ref<boolean>(false)
+const clickText = ref<string>(Math.random() < 0.5 ? "~Kururing" : "~Kururu")
 
-
+const showFloatingText = ref<boolean>(false);
 //Inventory 
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
@@ -31,6 +32,16 @@ const floatingTextTimeout = ref<any>(0)
 
 
 let coinsInterval = 0;
+
+function SetClickText() {
+  const random = Math.random() < 0.5 ? "~Kururing" : "~Kururu"
+  clickText.value = random;
+}
+
+const removeFloatingText = () => {
+    SetClickText();
+      showFloatingText.value = false;
+  };
 
 function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
@@ -85,13 +96,14 @@ function createFloatingText(): void {
 
 
 function removeText(id:string): void {
-   setTimeout(() => {
-      const index = floatTextList.value.findIndex(el => el === id);
-    if (index !== -1) {
-      floatTextList.value.splice(index, 1);
-    }
-    }, 1000);
-  
+  // const index = floatTextList.value.findIndex(el =>{
+  //   return el === id;
+  // });
+  // console.log(id)
+  // console.log(index)
+  //   if (index !== -1) {
+  //     //floatTextList.value.splice(index, 1);
+  //   }
 }
 
 
@@ -99,8 +111,13 @@ function kururing(): void {
   kururuCoins.value++
   hertaAttack.value = true
   shaking.value = true
-  const floatTextId: string = uuid4()
-  floatTextList.value.push(floatTextId);
+  showFloatingText.value = true
+  
+  //const floatTextId: string = uuid4()
+  // floatTextList.value.push(floatTextId);
+  // setTimeout(() => {
+  //   floatTextList.value.pop();
+  // }, 1200);
   //createHerta()
 }
 
@@ -128,9 +145,11 @@ onUnmounted(() => clearInterval(coinsInterval))
       </div>
 
       <!--Floating Text-->
-      <div v-for="id in floatTextList">
-        <FloatingText :is="id" :id="id" :key="id" @remove-text="removeText"/>
-      </div>
+      <!-- <div v-for="id in floatTextList">
+        <FloatingText :id="id" :key="id" @remove-text="removeText(id)" />
+      </div> -->
+      <div class="floating-text" v-if="showFloatingText" @animationend="removeFloatingText"> {{clickText}} </div>
+
 
       <!-- KURURU -->
       <div @click="kururing()">
@@ -175,5 +194,31 @@ onUnmounted(() => clearInterval(coinsInterval))
   width: 200px;
   height: 48px;
   border: #392a64 solid 2px;
+}
+
+
+.floating-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: #392a64;
+  font-weight: bold;
+  -webkit-text-fill-color: #392a64; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: white;
+  animation: floatText 2s linear;
+}
+
+@keyframes floatText {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -200%);
+  }
 }
 </style>

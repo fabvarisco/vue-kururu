@@ -13,13 +13,14 @@ const emit = defineEmits<{
 
 onMounted(()=>{
   const el = document.getElementById(props.id);
-
+  console.log(props.id)
  setTimeout(()=>{
-   el?.classList.remove("floating-text");
    el?.classList.add("floating-text-display");
-    emit("removeText", props.id);
-    console.log("tees")
-  },3000)
+  //  console.log(el)
+  //   emit("removeText", props.id);
+  //   console.log("tees")
+  },900)
+  emit("removeText", props.id);
 })
 
 onUnmounted(()=>{
@@ -36,10 +37,11 @@ onUnmounted(()=>{
 
 .floating-text {
   position: absolute;
+  opacity: 1;
   top: 50%;
   left: 50%;
   transform: translateY(-50%);
-  animation: floatAnimation 1s;
+  animation: floatAnimation 1s linear;
 }
 
 
@@ -48,9 +50,11 @@ onUnmounted(()=>{
 }
 @keyframes floatAnimation {
   0% {
+    opacity: 1;
     transform: translateY(-50%);
   }
   100% {
+    opacity: 0;
     transform: translateY(-600%);
   }
 }
