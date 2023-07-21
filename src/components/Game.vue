@@ -9,6 +9,8 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import FloatingText from "./FloatingText.vue";
 import Phone from './Phone.vue';
 import Map from './Map.vue';
+import HertaFloating from './HertaFloating.vue';
+
 
 interface IHertaComponent {
   id: string;
@@ -58,10 +60,6 @@ function shakeReset(): void {
 function floatTextReset(): void {
   showFloatingText.value = false;
 }
-function convertSizeToPx(size: number): string {
-  return size + "px"
-}
-
 function createHerta(): void {
   const newHerta: IHertaComponent = { id: "0", name: "kururu", size: 100, rotation: false };
   hertaList.value.push(newHerta);
@@ -73,43 +71,13 @@ function createHerta(): void {
   }, 3000);
 }
 
-function createFloatingText(): void {
-  const newHerta: IHertaComponent = { id: "0", name: "kururu", size: 100, rotation: false };
-  hertaList.value.push(newHerta);
-  setTimeout(() => {
-    const index = hertaList.value.findIndex(item => item.id === newHerta.id);
-    if (index !== -1) {
-      hertaList.value.splice(index, 1);
-    }
-  }, 3000);
-}
-
-
-
-function removeText(id:string): void {
-  // const index = floatTextList.value.findIndex(el =>{
-  //   return el === id;
-  // });
-  // console.log(id)
-  // console.log(index)
-  //   if (index !== -1) {
-  //     //floatTextList.value.splice(index, 1);
-  //   }
-}
-
-
 function kururing(): void {
   kururuCoins.value++
   hertaAttack.value = true
   shaking.value = true
   showFloatingText.value = true
+  createHerta()
   
-  //const floatTextId: string = uuid4()
-  // floatTextList.value.push(floatTextId);
-  // setTimeout(() => {
-  //   floatTextList.value.pop();
-  // }, 1200);
-  //createHerta()
 }
 
 onMounted(() => {
@@ -134,6 +102,8 @@ onUnmounted(() => clearInterval(coinsInterval))
           <p style="padding:16px">Dps: {{ dps }} </p>
         </div>
       </div>
+      <HertaSpining  />
+      <HertaFloating size="70px"  />
 
       <!--Options -->
       <Phone />

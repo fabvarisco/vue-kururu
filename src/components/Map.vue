@@ -4,7 +4,7 @@
 
 <template>
     <div class="kururu-map">
-        Map
+        <button>Map</button>
     </div>
 </template>
 <style>

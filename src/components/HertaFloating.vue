@@ -1,12 +1,12 @@
 <script setup lang="ts">
 defineProps<{
-    hertaSize: string
+    size: string
 }>()
 </script>
 
 <template>
     <div class="kururu-container">
-        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-rotation-image" />
+        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-translate-image" />
     </div>
 </template>
 
@@ -23,9 +23,9 @@ defineProps<{
     top: 50%;
     left: 50%;
     top: 10%;
-    height: v-bind('hertaSize');
+    height: v-bind('size');
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear infinite;
+    animation: moveImage 3s linear ;
 }
 
 .kururu-translate-image {
@@ -33,9 +33,9 @@ defineProps<{
     top: 50%;
     left: 50%;
     top: 10%;
-    height: v-bind('hertaSize');
+    height: v-bind('size');
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear infinite;
+    animation: moveImage 3s linear ;
 }
 
 .kururu-rotation-image {
@@ -43,10 +43,10 @@ defineProps<{
     top: 50%;
     left: 50%;
     top: 10%;
-    height: v-bind('hertaSize');
+    height: v-bind('size');
     transform: translate(-50%, -50%);
     width: 100px;
-    animation: rotation 3s infinite linear;
+    animation: rotation 3s  linear;
 
 }
 
@@ -56,7 +56,7 @@ defineProps<{
     }
 
     100% {
-        left: calc(90% - 100px);
+        left: calc(100% - 100px);
     }
 }
 
