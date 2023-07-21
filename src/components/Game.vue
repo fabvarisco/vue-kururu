@@ -7,6 +7,8 @@ import HertaSpining from './HertaSpining.vue';
 import Enemy from './Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
 import FloatingText from "./FloatingText.vue";
+import Phone from './Phone.vue';
+import Map from './Map.vue';
 
 interface IHertaComponent {
   id: string;
@@ -20,28 +22,15 @@ const cps = ref<number>(1)
 const dps = ref<number>(1)
 const hertaAttack = ref<boolean>(false)
 const shaking = ref<boolean>(false)
-const clickText = ref<string>(Math.random() < 0.5 ? "~Kururing" : "~Kururu")
+const showFloatingText = ref<boolean>(false)
 
-const showFloatingText = ref<boolean>(false);
 //Inventory 
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
 const hertaList = ref<IHertaComponent[]>([])
-const floatTextList = ref<string[]>([])
-const floatingTextTimeout = ref<any>(0)
 
 
-let coinsInterval = 0;
-
-function SetClickText() {
-  const random = Math.random() < 0.5 ? "~Kururing" : "~Kururu"
-  clickText.value = random;
-}
-
-const removeFloatingText = () => {
-    SetClickText();
-      showFloatingText.value = false;
-  };
+let coinsInterval:any = 0;
 
 function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
@@ -65,7 +54,9 @@ function hertaReset(): void {
 }
 function shakeReset(): void {
   shaking.value = false;
-
+}
+function floatTextReset(): void {
+  showFloatingText.value = false;
 }
 function convertSizeToPx(size: number): string {
   return size + "px"
@@ -144,17 +135,17 @@ onUnmounted(() => clearInterval(coinsInterval))
         </div>
       </div>
 
-      <!--Floating Text-->
-      <!-- <div v-for="id in floatTextList">
-        <FloatingText :id="id" :key="id" @remove-text="removeText(id)" />
-      </div> -->
-      <div class="floating-text" v-if="showFloatingText" @animationend="removeFloatingText"> {{clickText}} </div>
+      <!--Options -->
+      <Phone />
+      <Map />
 
+      <!--Floating Text-->
+      <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
 
       <!-- KURURU -->
       <div @click="kururing()">
-        <Enemy :value="shaking" @shakeReset="shakeReset" />
         <Herta :value="hertaAttack" @hertaReset="hertaReset" />
+        <Enemy :value="shaking" @shakeReset="shakeReset" />
       </div>
     </section>
     <!--Shop Section-->
@@ -182,7 +173,7 @@ onUnmounted(() => clearInterval(coinsInterval))
 }
 
 .game {
-  background-image: url('./assets/backgrounds/bkg_example.png');
+  background-image: url('../../src/assets/backgrounds/bkg_example.png');
   background-repeat: no-repeat;
   background-size: cover;
   height: 70vh;
@@ -197,28 +188,4 @@ onUnmounted(() => clearInterval(coinsInterval))
 }
 
 
-.floating-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  color: #392a64;
-  font-weight: bold;
-  -webkit-text-fill-color: #392a64; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 0.5px;
-  -webkit-text-stroke-color: white;
-  animation: floatText 2s linear;
-}
-
-@keyframes floatText {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -200%);
-  }
-}
 </style>

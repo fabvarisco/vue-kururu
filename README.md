@@ -9,9 +9,12 @@ A fan game based on Honkai Star Rail
 
 ## Gameplay
 
-### Shops
+### Shop
 
 ### Upgdades
+- Relics
+- Hammer
+- 
 
 ### Skill Tree
 

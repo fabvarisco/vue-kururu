@@ -1,24 +1,13 @@
 <script setup lang="ts">
 
 const items = [
-  { id: 1, name: 'Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 1, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
 ]
 const upgrades = [
-  { id: 1, name: 'Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
-  { id: 2, name: 'Hammer', price: 10, cps: 10, emitName: "hammerEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 1, name: 'Hammer', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
+  { id: 1, name: '~kururing bonus', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
 ]
 
 defineEmits(['buyItem'])
