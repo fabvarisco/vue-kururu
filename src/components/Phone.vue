@@ -1,19 +1,41 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
- const phoneModal = ref<boolean>(false);
- 
+const phoneModal = ref<boolean>(false);
+
+function ModalController(){
+    phoneModal.value = !phoneModal.value
+}
+
+
 </script>
 
 <template>
     <div class="kururu-phone">
-       <button @click="phoneModal=!phoneModal"> Phone</button>
+       <button @click="ModalController()"> Phone</button>
     </div>
-    <div class="kururu-dialog" v-if="phoneModal">
+    <span class="kururu-dialog" v-if="phoneModal">
         <div>
-            Content
+            <div>
+                profile
+            </div>
+            <div>
+                Username:
+            </div>
+            <div>
+                Player info:
+            </div>
+            <div>
+                Idler Level
+            </div>
         </div>
-    </div>
+        <div>
+            <button> Skill Tree</button>
+        </div>
+        <div>
+            <button> Social Media</button>
+        </div>
+    </span>
 </template>
 <style>
 
@@ -38,19 +60,29 @@ import { ref } from 'vue';
 
 .kururu-dialog {
     position: absolute;
-    top:0;
-    right: 0;
+    top: 0px;
+    right: 0px;
     width: 30%;
     height: 70vh;
     background:gray;
     z-index: 100;
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0px);
+   
+}
+
+.kururu-open-modal {
     animation: open-modal .3s linear;
 }
 
+.kururu-close-modal {
+    animation: close-modal .3s linear;
+}
+
+
 @keyframes open-modal {
     0% {
+        display: block;
         opacity: 0;
         transform:translateX(30px) ;
     }
@@ -67,7 +99,8 @@ import { ref } from 'vue';
     }
     100%{
         opacity: 0;
-        transform:translateX(30px) ;
+        transform:translateX(30px);
+        display: none;
     }
 }
 

@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { supabase } from '@/supabase';
+import { ref } from 'vue';
+
+const isNewAccount = ref<boolean>(true);
+
+function CreateAccount(){}
+
+function Login(){
+    
+}
 
 </script>
 
@@ -6,24 +16,39 @@
     <header class="kururing-title">
         <h1>Kururidle</h1>
     </header>
-    <article class="kururu-main">
-        <div class="kururu-container">
-
-            <div>login</div>
-            <div>
+    <section class="kururu-main">
+        <section>
+            <div class="kururu-container" v-if="isNewAccount">
+                <div>login</div>
                 <label>Username:</label>
                 <input />
-            </div>
-            <div>
+
                 <label>Password: </label>
                 <input />
+                <div>
+                    <button>Login</button>
+                    <button @click="isNewAccount=false">Create Account</button>
+                </div>
             </div>
-            <div>
-                <button>Login</button>
-                <button>Create Account</button>
+        </section>
+        <section>
+            <div class="kururu-container" v-if="!isNewAccount">
+                <div>Create Account</div>
+                <label>Username:</label>
+                <input />
+                <label>Username:</label>
+                <input />
+                <label>Password: </label>
+                <input />
+                <label>Confirm Password: </label>
+                <input />
+                <div>
+                    <button>Create Account</button>
+                    <button @click="isNewAccount=true">Back</button>
+                </div>
             </div>
-        </div>
-    </article>
+        </section>
+    </section>
 </template>
 
 <style scoped>
@@ -31,6 +56,7 @@
     display: flex;
     justify-content: center;
 }
+
 .kururu-main {
     display: flex;
     justify-content: center;
