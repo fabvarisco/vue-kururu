@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { supabase } from '@/supabase';
 import type { User } from '@supabase/supabase-js';
-import { ref } from 'vue';
+import { ref, onUpdated } from 'vue';
 
 interface IUser {
     username: string;
@@ -28,10 +28,13 @@ async function Login() {
         email: user.value.email,
         password: user.value.password
     })
+    console.log(data)
+    console.log(error)
 }
 
 async function getCurrentUser() {
-    const localUser = await supabase.auth.getSession
+    const localUser = await supabase.auth.getSession();
+    console.log(localUser)
 }
 
 </script>
@@ -42,16 +45,16 @@ async function getCurrentUser() {
     </header>
     <section class="kururu-main">
         <section>
-            <form>
+            <form @submit.prevent="Login">
                 <div class="kururu-container" v-if="isNewAccount">
                     <div>login</div>
-                    <label>Username:</label>
-                    <input />
+                    <label>Email:</label>
+                    <input type="email" name="email" v-model="user.email"/>
 
                     <label>Password: </label>
-                    <input />
+                    <input type="password" v-model="user.password"/>
                     <div>
-                        <button>Login</button>
+                        <button type="submit">Login</button>
                         <button @click="isNewAccount = false">Create Account</button>
                     </div>
                 </div>
@@ -72,6 +75,8 @@ async function getCurrentUser() {
                     <div>
                         <button type="submit">Create Account</button>
                         <button @click="isNewAccount = true">Back</button>
+                        <button @click="getCurrentUser()">Back</button>
+
                     </div>
                 </div>
             </form>

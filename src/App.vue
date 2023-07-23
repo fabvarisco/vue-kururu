@@ -6,15 +6,15 @@ import Home from './components/Home.vue';
 
 const session = ref()
 
-// onMounted(() => {
-//   supabase.auth.getSession().then(({ data }) => {
-//     session.value = data.session
-//   })
+onMounted(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    session.value = data.session
+  })
 
-//   supabase.auth.onAuthStateChange((_, _session) => {
-//     session.value = _session
-//   })
-// })
+  supabase.auth.onAuthStateChange((_, _session) => {
+    session.value = _session
+  })
+})
 
 
 const isLogged = ref<boolean>(false);
