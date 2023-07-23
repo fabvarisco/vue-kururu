@@ -1,13 +1,37 @@
 <script setup lang="ts">
 import { supabase } from '@/supabase';
+import type { User } from '@supabase/supabase-js';
 import { ref } from 'vue';
+
+interface IUser {
+    username: string;
+    email: string;
+    password: string;
+}
 
 const isNewAccount = ref<boolean>(true);
 
-function CreateAccount(){}
+const user = ref<IUser>({ username: '', email: '', password: '' })
 
-function Login(){
-    
+async function CreateAccount() {
+    console.log(user)
+    const { data, error } = await supabase.auth.signUp({
+        email: user.value.email,
+        password: user.value.password
+    })
+    console.log(data)
+    console.log(error)
+}
+
+async function Login() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: user.value.email,
+        password: user.value.password
+    })
+}
+
+async function getCurrentUser() {
+    const localUser = await supabase.auth.getSession
 }
 
 </script>
@@ -18,35 +42,39 @@ function Login(){
     </header>
     <section class="kururu-main">
         <section>
-            <div class="kururu-container" v-if="isNewAccount">
-                <div>login</div>
-                <label>Username:</label>
-                <input />
+            <form>
+                <div class="kururu-container" v-if="isNewAccount">
+                    <div>login</div>
+                    <label>Username:</label>
+                    <input />
 
-                <label>Password: </label>
-                <input />
-                <div>
-                    <button>Login</button>
-                    <button @click="isNewAccount=false">Create Account</button>
+                    <label>Password: </label>
+                    <input />
+                    <div>
+                        <button>Login</button>
+                        <button @click="isNewAccount = false">Create Account</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </section>
         <section>
-            <div class="kururu-container" v-if="!isNewAccount">
-                <div>Create Account</div>
-                <label>Username:</label>
-                <input />
-                <label>Username:</label>
-                <input />
-                <label>Password: </label>
-                <input />
-                <label>Confirm Password: </label>
-                <input />
-                <div>
-                    <button>Create Account</button>
-                    <button @click="isNewAccount=true">Back</button>
+            <form @submit.prevent="CreateAccount">
+                <div class="kururu-container" v-if="!isNewAccount">
+                    <div>Create Account</div>
+                    <label>Username:</label>
+                    <input type="text" name="username" v-model="user.username" />
+                    <label>Email:</label>
+                    <input type="email" v-model="user.email" />
+                    <label>Password: </label>
+                    <input type="password" v-model="user.password" />
+                    <label>Confirm Password: </label>
+                    <input type="password"/>
+                    <div>
+                        <button type="submit">Create Account</button>
+                        <button @click="isNewAccount = true">Back</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </section>
     </section>
 </template>
