@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
+const shopActive = ref<boolean>(true);
+const upgradesActive = ref<boolean>(true);
 
 const items = [
   { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
   { id: 1, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
   { id: 1, name: 'Floating Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
-
+  { id: 1, name: 'Screen Saver Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
 ]
 const upgrades = [
   { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta stuff/hammer.png" },
@@ -18,18 +22,38 @@ defineEmits(['buyItem'])
 
 <template >
   <div class="shop-container">
-    <div>
+    <div class="header">
+      <button>Shop</button>
+      <button>Upgrades</button>
+    </div>
+    <div v-if="shopActive">
       <h2 class="title">Shop</h2>
-      <div >
-
+      <div class="grid-container">
+        <button v-for="item in items" :key="item.id" class="grid-item"
+          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
+          <p>{{ item.name }}</p>
+          <p>Price {{ item.price }}</p>
+          <p>Cps {{ item.cps }}</p>
+          <img class="image-size" src="../assets/herta stuff/hammer.png" />
+        </button>
       </div>
     </div>
   </div>
 </template>
-
 <style scoped>
+.shop-container {
+  width: 100%;
+  height: 100%;
+  background: grey;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+}
+
 .image-size {
-  height: 40px;
+  height: 80px;
 }
 
 .grid-container {
@@ -37,7 +61,7 @@ defineEmits(['buyItem'])
   margin: 10px;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 4px;
   border-radius: 5px;
@@ -54,24 +78,5 @@ defineEmits(['buyItem'])
   color: white;
 }
 
-.shop-container {
-  background: #2c3e50;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* 2 columns */
-  grid-gap: 10px;
-  /* Gap between grid items */
-  height: 100vh;
-  width: 100wh;
-}
-
-@media (max-width: 767px) {
-  .shop-container {
-    grid-template-columns: 1fr;
-    /* 1 column */
-    grid-template-rows: 1fr 1fr;
-    /* 2 rows */
-  }
-}
 </style>
 

@@ -92,16 +92,15 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 <template>
   <main class="kururu-game">
-    <div class="kururu-container" style="border: solid 1px;">
-      <div @click="kururing()"> 
-        <Herta :value="hertaAttack" @hertaReset="hertaReset" />
+    <section class="kururu-container" style="border: solid 1px;" >
+      <button @click="kururing()" style="all:unset; cursor: pointer;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
-      </div>
-    </div>
-    <div class="kururu-container ">
-      <h1>Container 2</h1>
-      <p>This is the second container.</p>
-    </div>
+        <Herta :value="hertaAttack" @hertaReset="hertaReset" />
+      </button>
+    </section>
+    <section class="kururu-container ">
+      <Shop />
+    </section>
   </main>
 </template>
 
