@@ -32,7 +32,7 @@ const herta = ref<number>(0)
 const hertaList = ref<IHertaComponent[]>([])
 
 
-let coinsInterval:any = 0;
+let coinsInterval: any = 0;
 
 function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
@@ -77,7 +77,7 @@ function kururing(): void {
   shaking.value = true
   showFloatingText.value = true
   createHerta()
-  
+
 }
 
 onMounted(() => {
@@ -91,65 +91,50 @@ onUnmounted(() => clearInterval(coinsInterval))
 </script>
 
 <template>
-  <main>
-    <!--Game Section-->
-    <section class="game">
-      <div class="kurukuru-coins">
-        <p>Kururu Coins: {{ kururuCoins }} </p>
-        <div style="display: flex; justify-content: center; font-size: 28px;">
-          <p style="padding:16px">Cps: {{ cps }} </p>
-          <p style="padding:16px">Idle Dps: {{ dps }} </p>
-          <p style="padding:16px">Dps: {{ dps }} </p>
-        </div>
-      </div>
-      <HertaSpining  />
-      <HertaFloating size="70px"  />
-
-      <!--Options -->
-      <Phone />
-      <Map />
-
-      <!--Floating Text-->
-      <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
-
-      <!-- KURURU -->
-      <div @click="kururing()">
+  <main class="kururu-game">
+    <div class="kururu-container" style="border: solid 1px;">
+      <div @click="kururing()"> 
         <Herta :value="hertaAttack" @hertaReset="hertaReset" />
-        <Enemy :value="shaking" @shakeReset="shakeReset" />
+        <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
       </div>
-    </section>
-    <!--Shop Section-->
-    <section class="shop-container">
-      <Shop @buyItem="buyItem" />
-    </section>
+    </div>
+    <div class="kururu-container ">
+      <h1>Container 2</h1>
+      <p>This is the second container.</p>
+    </div>
   </main>
 </template>
 
 
 <style scoped>
-.kurukuru-coins {
+
+
+.kururu-game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+.kururu-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+
+.kururu-main {
+  display: flex;
+}
+
+.kurukuru-count {
   color: white;
   text-align: center;
-  font-size: 57px;
 }
-
-.shop-container {
-  position: relative;
-  z-index: 100;
-  width: 100vw;
-  height: 30vh;
-  overflow: auto;
-  ;
-}
-
-.game {
-  background-image: url('../../src/assets/backgrounds/bkg_example.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 70vh;
-  width: 100vw;
-}
-
 .kururin-button {
   background: #7b5cad;
   width: 200px;
@@ -157,5 +142,11 @@ onUnmounted(() => clearInterval(coinsInterval))
   border: #392a64 solid 2px;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .kururu-game {
+    grid-template-columns: 1fr;
+  }
+}
 
 </style>

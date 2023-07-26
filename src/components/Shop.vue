@@ -20,26 +20,8 @@ defineEmits(['buyItem'])
   <div class="shop-container">
     <div>
       <h2 class="title">Shop</h2>
-      <div class="grid-container">
-        <button v-for="item in items" :key="item.id" class="grid-item"
-          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
-          <p>{{ item.name }}</p>
-          <p>Price {{ item.price }}</p>
-          <p>Cps {{ item.cps }}</p>
-          <img class="image-size" src="../assets/herta stuff/hammer.png" />
-        </button>
-      </div>
-    </div>
-    <div>
-      <h2 class="title">Upgrades</h2>
-      <div class="grid-container">
-        <button v-for="item in upgrades" :key="item.id" class="grid-item"
-          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
-          <p>{{ item.name }}</p>
-          <p>Price {{ item.price }}</p>
-          <p>Cps {{ item.cps }}</p>
-          <img class="image-size" src="../assets/herta stuff/hammer.png" />
-        </button>
+      <div >
+
       </div>
     </div>
   </div>
@@ -55,7 +37,7 @@ defineEmits(['buyItem'])
   margin: 10px;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 4px;
   border-radius: 5px;
@@ -79,6 +61,8 @@ defineEmits(['buyItem'])
   /* 2 columns */
   grid-gap: 10px;
   /* Gap between grid items */
+  height: 100vh;
+  width: 100wh;
 }
 
 @media (max-width: 767px) {

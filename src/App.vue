@@ -37,7 +37,7 @@ const player = {
   <main>
     <!-- <Game v-if="session" :session="session" />
     <Home v-else /> -->
-    <Home />
+    <Game />
   </main>
 </template>
 
