@@ -92,6 +92,13 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 <template>
   <main class="kururu-game">
+    <div class="kurukuru-count">
+        <h1>Kururu Count: {{ kururuCoins }} </h1>
+        <div style="display: flex; justify-content: center; font-size: 28px;">
+          <h6 style="padding:16px">KPS: {{ cps }} </h6>
+        </div>
+      </div>
+      
     <section class="kururu-container" style="border: solid 1px;" >
       <button @click="kururing()" style="all:unset; cursor: pointer;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
@@ -131,8 +138,12 @@ onUnmounted(() => clearInterval(coinsInterval))
 }
 
 .kurukuru-count {
+  position: absolute;
   color: white;
   text-align: center;
+  left: 20%;
+  top: 10%;
+
 }
 .kururin-button {
   background: #7b5cad;
