@@ -63,7 +63,7 @@ defineEmits(['buyItem'])
           <p>Price {{ item.price }}</p>
           <p>Cps {{ item.cps }}</p>
           <p>Level {{ item.cps }}</p>
-          <img class="image-size" :src="require(item.src)" />
+          <img class="image-size" :src="item.src" />
         </button>
       </div>
     </div>
@@ -100,12 +100,13 @@ defineEmits(['buyItem'])
 
 .grid-item {
   position: relative;
-  background-color: #ccc;
   padding: 10px;
   height: 200px;
   display: flex;
+  border: .01rem solid #e6e6e6;
+  background-color: rgba(230,230,230,.5);
+  border: 4px solid black;
 }
-
 .grid-item p {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-weight: bold;
