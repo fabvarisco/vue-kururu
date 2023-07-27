@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import uuid4 from 'uuid4';
 import Herta from './Herta.vue';
 import Shop from './Shop.vue';
 import KururuMusic from './KururuMusic.vue';
@@ -7,8 +6,6 @@ import HertaSpining from './HertaSpining.vue';
 import Enemy from './Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
 import FloatingText from "./FloatingText.vue";
-import Phone from './Phone.vue';
-import Map from './Map.vue';
 import HertaFloating from './HertaFloating.vue';
 
 
@@ -92,21 +89,22 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 <template>
   <main class="kururu-game">
-    <div class="kurukuru-count">
-        <h1>Kururu Count: {{ kururuCoins }} </h1>
+
+      
+    <section class="kururu-container" style="border: solid 1px;" >
+      <div class="kurukuru-count">
+        <h1>Kururu Coins: {{ kururuCoins }} </h1>
         <div style="display: flex; justify-content: center; font-size: 28px;">
           <h6 style="padding:16px">KPS: {{ cps }} </h6>
         </div>
       </div>
-      
-    <section class="kururu-container" style="border: solid 1px;" >
       <button @click="kururing()" style="all:unset; cursor: pointer;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
         <Herta :value="hertaAttack" @hertaReset="hertaReset" />
       </button>
     </section>
     <section class="kururu-container ">
-      <Shop />
+      <Shop @buyItem="buyItem" />
     </section>
   </main>
 </template>

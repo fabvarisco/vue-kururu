@@ -52,9 +52,9 @@ watch(
 
 <template>
     <div class="herta-container">
-        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class=" herta-none"
+        <img src="../assets/herta-stuff/herta.gif" alt="KURURING!" class=" herta-none"
             id="herta-gif" />
-        <img src="../assets/herta stuff/herta.png" alt="KURURING!" class=" herta-block"
+        <img src="../assets/herta-stuff/herta.png" alt="KURURING!" class=" herta-block"
             id="herta-png" />
     </div>
 </template>

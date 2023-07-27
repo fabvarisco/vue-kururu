@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
     <div class="kururu-container">
-        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-translate-image" />
+        <img src="../assets/herta-stuff/herta.gif" alt="KURURING!" class="kururu-translate-image" />
     </div>
 </template>
 

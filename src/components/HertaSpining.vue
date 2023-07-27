@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <span><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
+    <span><img src="../assets/herta-stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
 </template>
 
 
