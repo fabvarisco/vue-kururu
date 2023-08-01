@@ -3,6 +3,7 @@ import Herta from './Herta.vue';
 import Shop from './Shop.vue';
 import KururuMusic from './KururuMusic.vue';
 import HertaSpining from './HertaSpining.vue';
+import GiantHerta from './GiantHerta.vue';
 import Enemy from './Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
 import FloatingText from "./FloatingText.vue";
@@ -34,7 +35,7 @@ function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
     kururuCoins.value -= item.price;
     switch (item.name) {
-      case "SpiningHerta":
+      case "Spining Herta":
         hertaSpining.value++;
         cps.value += item.cps
         break;
@@ -98,81 +99,8 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 
     <section class="kururu-container" style="border: solid 1px;">
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
-      <HertaSpining />
+      <GiantHerta />
+      <HertaSpining v-for="herta in hertaSpining" />
       <div class="kurukuru-count">
         <h1>Kururu Coins: {{ kururuCoins }} </h1>
         <div style="display: flex; justify-content: center; font-size: 28px;">
@@ -206,7 +134,6 @@ onUnmounted(() => clearInterval(coinsInterval))
   justify-content: center;
   align-items: center;
   text-align: center;
-
 }
 
 
@@ -235,4 +162,5 @@ onUnmounted(() => clearInterval(coinsInterval))
   .kururu-game {
     grid-template-columns: 1fr;
   }
-}</style>
+}
+</style>

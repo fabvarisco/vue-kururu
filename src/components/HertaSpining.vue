@@ -8,7 +8,7 @@ const position = reactive<{ x: string, y: string }>({ x: "", y: "" });
 onMounted(() => {
     size.value = Math.random() * 200 + "px";
     position.x = Math.random() * window.innerHeight + "px";
-    position.y = Math.random() * window.innerWidth + "px";
+    position.y = Math.random() * 500 + "px";
 })
 
 </script>

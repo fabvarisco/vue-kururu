@@ -2,6 +2,8 @@
 defineProps<{
     size: string
 }>()
+
+
 </script>
 
 <template>
@@ -14,8 +16,9 @@ defineProps<{
 
 <style scoped>
 .kururu-container {
-    width: 100%;
-    height: 50%;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
 }
 
 .kururu-image {
@@ -25,7 +28,7 @@ defineProps<{
     top: 10%;
     height: v-bind('size');
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear ;
+    animation: moveImage 3s infinite ;
 }
 
 .kururu-translate-image {
@@ -35,7 +38,7 @@ defineProps<{
     top: 10%;
     height: v-bind('size');
     transform: translate(-50%, -50%);
-    animation: moveImage 3s linear ;
+    animation: moveImage 5s infinite ;
 }
 
 .kururu-rotation-image {
@@ -56,7 +59,7 @@ defineProps<{
     }
 
     100% {
-        left: calc(100% - 100px);
+        left: 110vw;
     }
 }
 
