@@ -8,6 +8,7 @@ import Enemy from './Enemy.vue';
 import { onMounted, onUnmounted, ref } from 'vue'
 import FloatingText from "./FloatingText.vue";
 import HertaFloating from './HertaFloating.vue';
+import ScreenSaverHerta from './ScreenSaverHerta.vue';
 
 
 const kururuCoins = ref<number>(0)
@@ -100,6 +101,17 @@ onUnmounted(() => clearInterval(coinsInterval))
 
     <section class="kururu-container" style="border: solid 1px;">
       <GiantHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+      <ScreenSaverHerta />
+
       <HertaSpining v-for="herta in hertaSpining" />
       <div class="kurukuru-count">
         <h1>Kururu Coins: {{ kururuCoins }} </h1>
