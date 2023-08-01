@@ -9,13 +9,6 @@ import FloatingText from "./FloatingText.vue";
 import HertaFloating from './HertaFloating.vue';
 
 
-interface IHertaComponent {
-  id: string;
-  name: string;
-  size: number;
-  rotation: boolean;
-}
-
 const kururuCoins = ref<number>(0)
 const cps = ref<number>(1)
 const dps = ref<number>(1)
@@ -26,6 +19,12 @@ const showFloatingText = ref<boolean>(false)
 //Inventory 
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
+
+const hertaSpining = ref<number>(0)
+const hertaFloat = ref<number>(0)
+const hertaGiant = ref<number>(0)
+const hertaScreenSaver = ref<number>(0)
+
 const hertaList = ref<IHertaComponent[]>([])
 
 
@@ -35,15 +34,22 @@ function buyItem(item: any): void {
   if (kururuCoins.value >= item.price) {
     kururuCoins.value -= item.price;
     switch (item.name) {
-      case "Hammer":
-        hammer.value++;
+      case "SpiningHerta":
+        hertaSpining.value++;
         cps.value += item.cps
         break;
-      case "Herta":
-        herta.value++;
+      case "FloatingHerta":
+        hertaFloat.value++;
         cps.value += item.cps
         break;
-
+      case "GiantHerta":
+        hertaGiant.value++;
+        cps.value += item.cps
+        break;
+      case "ScreenSaverHerta":
+        hertaScreenSaver.value++;
+        cps.value += item.cps
+        break;
     }
   }
 }
@@ -90,16 +96,91 @@ onUnmounted(() => clearInterval(coinsInterval))
 <template>
   <main class="kururu-game">
 
-      
-    <section class="kururu-container" style="border: solid 1px;" >
+
+    <section class="kururu-container" style="border: solid 1px;">
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
+      <HertaSpining />
       <div class="kurukuru-count">
         <h1>Kururu Coins: {{ kururuCoins }} </h1>
         <div style="display: flex; justify-content: center; font-size: 28px;">
-          <h6 style="padding:16px">KPS: {{ cps }} </h6>
+          <h6 style="padding:16px">cps: {{ cps }} </h6>
         </div>
       </div>
       <button @click="kururing()" style="all:unset; cursor: pointer;">
-        <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset"/>
+        <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset" />
         <Herta :value="hertaAttack" @hertaReset="hertaReset" />
       </button>
     </section>
@@ -111,8 +192,6 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 
 <style scoped>
-
-
 .kururu-game {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -143,6 +222,7 @@ onUnmounted(() => clearInterval(coinsInterval))
   top: 10%;
 
 }
+
 .kururin-button {
   background: #7b5cad;
   width: 200px;
@@ -155,6 +235,4 @@ onUnmounted(() => clearInterval(coinsInterval))
   .kururu-game {
     grid-template-columns: 1fr;
   }
-}
-
-</style>
+}</style>

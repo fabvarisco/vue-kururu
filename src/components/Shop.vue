@@ -43,7 +43,7 @@ defineEmits(['buyItem'])
         <button v-for="item in items" :key="item.id" class="grid-item"
           @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
           <div>
-            <p>{{ item.name }}</p>
+            <h2>{{ item.name }}</h2>
             <p>Price {{ item.price }}</p>
             <p>Cps {{ item.cps }}</p>
             <p>Level {{ item.cps }}</p>
@@ -59,7 +59,7 @@ defineEmits(['buyItem'])
       <div class="grid-container">
         <button v-for="item in upgrades" :key="item.id" class="grid-item"
           @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
-          <p>{{ item.name }}</p>
+          <h2>{{ item.name }}</h2>
           <p>Price {{ item.price }}</p>
           <p>Cps {{ item.cps }}</p>
           <p>Level {{ item.cps }}</p>
@@ -106,6 +106,7 @@ defineEmits(['buyItem'])
   border: .01rem solid #e6e6e6;
   background-color: rgba(230,230,230,.5);
   border: 4px solid black;
+  text-align: left;
 }
 .grid-item p {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
