@@ -1,7 +1,17 @@
- 
 interface IHertaComponent {
-  id: string;
+  id: string
+  name: string
+  size: number
+  rotation: boolean
+}
+
+interface IShopItem {
+  id: number;
   name: string;
-  size: number;
-  rotation: boolean;
+  price: number;
+  cps: number;
+  emitName: string;
+  src: string;
+  css: string;
+  wrapperDiv?: string;
 }

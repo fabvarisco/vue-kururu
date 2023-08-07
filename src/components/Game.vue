@@ -38,17 +38,18 @@ function buyItem(item: any): void {
     switch (item.name) {
       case "Spining Herta":
         hertaSpining.value++;
+        item.price *= 2;
         cps.value += item.cps
         break;
-      case "FloatingHerta":
+      case "Floating Herta":
         hertaFloat.value++;
         cps.value += item.cps
         break;
-      case "GiantHerta":
+      case "Giant Herta":
         hertaGiant.value++;
         cps.value += item.cps
         break;
-      case "ScreenSaverHerta":
+      case "Screen Saver Herta":
         hertaScreenSaver.value++;
         cps.value += item.cps
         break;
@@ -100,19 +101,6 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 
     <section class="kururu-container" style="border: solid 1px;">
-      <GiantHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-      <ScreenSaverHerta />
-
-      <HertaSpining v-for="herta in hertaSpining" />
       <div class="kurukuru-count">
         <h1>Kururu Coins: {{ kururuCoins }} </h1>
         <div style="display: flex; justify-content: center; font-size: 28px;">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+const emit = defineEmits(['buyItem'])
 
 const shopActive = ref<boolean>(true);
 const upgradesActive = ref<boolean>(false);
@@ -15,19 +16,23 @@ function openUpgrades(): void {
   shopActive.value = false;
 }
 
-const items = [
-  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/herta.gif", css: "" },
-  { id: 2, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/herta.png", css: "giant-herta" },
-  { id: 3, name: 'Floating Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/herta.png", css: "floating-herta" },
-  { id: 4, name: 'Screen Saver Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/herta.png", wrapperDiv:'herta-screen-x', css: "herta-screen herta-screen-y" },
+function buyItem(item: IShopItem) {
+  emit('buyItem', { name: item.name, cps: item.cps, price: item.price })
+}
+
+const items:IShopItem[] = [
+  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/herta.gif", css: "" },
+  { id: 2, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/herta.png", css: "giant-herta" },
+  { id: 3, name: 'Floating Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/herta.png", css: "floating-herta" },
+  { id: 4, name: 'Screen Saver Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
 ]
-const upgrades = [
-  { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 2, name: 'Hammer', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 3, name: '~kururing bonus', price: 10, cps: 1, emitName: "hertaEvent", src: "src/assets/herta-stuff/hammer.png", css: "" },
+const upgrades:IShopItem[] = [
+  { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/hammer.png", css: "" },
+  { id: 2, name: 'Hammer', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/hammer.png", css: "" },
+  { id: 3, name: '~kururing bonus', price: 10, cps: 1, emitName: "hertaEvent", src: "../assets/herta-stuff/hammer.png", css: "" },
 ]
 
-defineEmits(['buyItem'])
+
 
 </script>
 
@@ -40,8 +45,7 @@ defineEmits(['buyItem'])
     <div v-if="shopActive">
       <h2 class="title">Shop</h2>
       <div class="grid-container">
-        <button v-for="item in items" :key="item.id" class="grid-item"
-          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
+        <button v-for="item in items" :key="item.id" class="grid-item" @click="buyItem(item)">
           <div>
             <h2>{{ item.name }}</h2>
             <p>Price {{ item.price }}</p>
@@ -57,8 +61,7 @@ defineEmits(['buyItem'])
     <div v-if="upgradesActive">
       <h2 class="title">Upgrades</h2>
       <div class="grid-container">
-        <button v-for="item in upgrades" :key="item.id" class="grid-item"
-          @click="$emit('buyItem', { name: item.name, cps: item.cps, price: item.price })">
+        <button v-for="item in upgrades" :key="item.id" class="grid-item" @click="buyItem(item)">
           <h2>{{ item.name }}</h2>
           <p>Price {{ item.price }}</p>
           <p>Cps {{ item.cps }}</p>
@@ -104,10 +107,18 @@ defineEmits(['buyItem'])
   height: 200px;
   display: flex;
   border: .01rem solid #e6e6e6;
-  background-color: rgba(230,230,230,.5);
+  background-color: rgba(230, 230, 230, .5);
   border: 4px solid black;
   text-align: left;
+  cursor: pointer;
 }
+
+.grid-item:hover {
+  background-color: rgba(126, 126, 126, 0.5);
+  border: 4px solid rgb(56, 35, 35);
+
+}
+
 .grid-item p {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-weight: bold;
