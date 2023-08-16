@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {onMounted, ref } from 'vue';
 import { supabase } from './supabase'
-import Game from './components/Game.vue';
-import Home from './components/Home.vue';
+import Game from './views/Game.vue';
+import Home from './views/Home.vue';
 
 const session = ref()
 
