@@ -11,18 +11,18 @@
 .giant-kururu {
     position: absolute;
     z-index: 10000;
-    bottom: 0;
     animation: moveImage 10s infinite;
-    transform: translate(-100%,0);
+    left: 0;
+    transform: translate(-100%,100%);
 }
 
 @keyframes moveImage {
     0% {
-        left: 0;
+        transform: translate(-100vw,100%);
     }
 
     100% {
-        left: 200%;
+        transform: translate(100vw,100%);
     }
 }
 </style>

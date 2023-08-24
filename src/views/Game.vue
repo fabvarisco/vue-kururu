@@ -99,7 +99,7 @@ onUnmounted(() => clearInterval(coinsInterval))
       <HertaSpining v-for="el in hertaSpining" />
       <ScreenSaverHerta v-for="el in hertaScreenSaver" />
       <HertaFloating v-for="el in hertaFloat" />
-      <GiantHerta v-if="hertaGiant >= 0" />
+      <GiantHerta v-if="hertaGiant >= 1"/>
     </div>
     <section class="kururu-container" style="border: solid 1px;">
       <div class="kurukuru-count">

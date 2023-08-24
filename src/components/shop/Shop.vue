@@ -23,6 +23,7 @@ function openUpgrades(): void {
 
 function buyItem(item: IShopItem) {
   emit('buyItem', { name: item.name, cps: item.cps, price: item.price })
+  item.price *= 2
 }
 
 const items:IShopItem[] = [
