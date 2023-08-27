@@ -15,3 +15,15 @@ interface IShopItem {
   css: string;
   wrapperDiv?: string;
 }
+
+
+interface IPlayer {
+  username: string,
+  coins: number,
+  cps: number,
+  dps: number,
+  idps: string,
+  shopItens: object,
+  upgrades: object,
+  skills: object
+}

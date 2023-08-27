@@ -20,11 +20,11 @@ onMounted(() => {
 const isLogged = ref<boolean>(false);
 
 
-const player = {
+const player: IPlayer = {
   username: "",
   coins: 0,
-  cps: "",
-  dps: "",
+  cps: 0,
+  dps: 0,
   idps: "",
   shopItens: {},
   upgrades: {},
@@ -37,7 +37,7 @@ const player = {
   <main>
     <!-- <Game v-if="session" :session="session" />
     <Home v-else /> -->
-    <Game />
+    <Game :player="player" />
   </main>
 </template>
 

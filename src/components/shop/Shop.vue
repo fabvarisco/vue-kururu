@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive, defineComponent } from 'vue';
 const emit = defineEmits(['buyItem'])
 
 const shopActive = ref<boolean>(true);
 const upgradesActive = ref<boolean>(false);
 
 
-function WrapperDiv(wrapper:string | undefined): string { 
+function WrapperDiv(wrapper: string | undefined): string {
 
   return wrapper ? wrapper : ""
 }
@@ -23,21 +23,20 @@ function openUpgrades(): void {
 
 function buyItem(item: IShopItem) {
   emit('buyItem', { name: item.name, cps: item.cps, price: item.price })
-  item.price *= 2
+
 }
 
-const items:IShopItem[] = [
-  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.gif", css: "",  },
+const items = reactive<IShopItem[]>([
+  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.gif", css: "", },
   { id: 2, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "giant-herta" },
   { id: 3, name: 'Floating Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
   { id: 4, name: 'Screen Saver Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
-]
-const upgrades:IShopItem[] = [
+]);
+const upgrades = reactive<IShopItem[]>([
   { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
   { id: 2, name: 'Hammer', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
   { id: 3, name: '~kururing bonus', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-]
-
+]);
 
 
 </script>

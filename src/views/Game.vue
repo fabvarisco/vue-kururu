@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import Herta from '../components/herta/Herta.vue';
 import Shop from '../components/shop/Shop.vue';
 import KururuMusic from '../components/utils/KururuMusic.vue';
@@ -9,9 +9,13 @@ import FloatingText from "../components/utils/FloatingText.vue";
 import ScreenSaverHerta from '../components/herta/ScreenSaverHerta.vue';
 import HertaFloating from '../components/herta/HertaFloating.vue';
 
+interface Props {
+  player: IPlayer
+}
 
-const kururuCoins = ref<number>(0)
-const cps = ref<number>(1)
+const props = defineProps<Props>()
+
+const player = reactive<IPlayer>(props.player)
 const dps = ref<number>(1)
 const hertaAttack = ref<boolean>(false)
 const shaking = ref<boolean>(false)
@@ -31,25 +35,25 @@ const hertaList = ref<any[]>([])
 let coinsInterval: any = 0;
 
 function buyItem(item: any): void {
-  if (kururuCoins.value >= item.price) {
-    kururuCoins.value -= item.price;
+  console.log(item.price)
+  if (player.coins >= item.price) {
+    player.coins -= item.price;
     switch (item.name) {
       case "Spining Herta":
         hertaSpining.value++;
-        item.price *= 2;
-        cps.value += item.cps
+        player.cps += item.cps
         break;
       case "Floating Herta":
         hertaFloat.value++;
-        cps.value += item.cps
+        player.cps += item.cps
         break;
       case "Giant Herta":
         hertaGiant.value++;
-        cps.value += item.cps
+        player.cps += item.cps
         break;
       case "Screen Saver Herta":
         hertaScreenSaver.value++;
-        cps.value += item.cps
+        player.cps += item.cps
         break;
     }
   }
@@ -76,7 +80,7 @@ function createHerta(): void {
 }
 
 function kururing(): void {
-  kururuCoins.value++
+  player.coins++
   hertaAttack.value = true
   shaking.value = true
   showFloatingText.value = true
@@ -85,7 +89,7 @@ function kururing(): void {
 
 onMounted(() => {
   coinsInterval = setInterval(() => {
-    kururuCoins.value += cps.value;
+    player.coins += player.cps;
   }, 1000);
 })
 
@@ -99,13 +103,13 @@ onUnmounted(() => clearInterval(coinsInterval))
       <HertaSpining v-for="el in hertaSpining" />
       <ScreenSaverHerta v-for="el in hertaScreenSaver" />
       <HertaFloating v-for="el in hertaFloat" />
-      <GiantHerta v-if="hertaGiant >= 1"/>
+      <GiantHerta v-if="hertaGiant >= 1" />
     </div>
     <section class="kururu-container" style="border: solid 1px;">
       <div class="kurukuru-count">
-        <h1>Kururu Coins: {{ kururuCoins }} </h1>
+        <h1>Kururu Coins: {{ player.coins }} </h1>
         <div style="display: flex; justify-content: center; font-size: 28px;">
-          <h6 style="padding:16px">cps: {{ cps }} </h6>
+          <h6 style="padding:16px">cps: {{ player.cps }} </h6>
         </div>
       </div>
       <button @click="kururing()" style="all:unset; cursor: pointer;">
