@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive, defineComponent } from 'vue';
+interface Props {
+  playerShopItems: IPlayerShopItems
+}
+
+const props = defineProps<Props>()
+
+
 const emit = defineEmits(['buyItem'])
 
 const shopActive = ref<boolean>(true);
@@ -21,21 +28,21 @@ function openUpgrades(): void {
   shopActive.value = false;
 }
 
-function buyItem(item: IShopItem) {
-  emit('buyItem', { name: item.name, cps: item.cps, price: item.price })
+function buyItem(itemKey: shopItemKey) {
+  emit('buyItem', itemKey)
 
 }
 
 const items = reactive<IShopItem[]>([
-  { id: 1, name: 'Spining Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.gif", css: "", },
-  { id: 2, name: 'Giant Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "giant-herta" },
-  { id: 3, name: 'Floating Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
-  { id: 4, name: 'Screen Saver Herta', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
+  { id: 1, name: 'Spining Herta', key: 'spiningHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.gif", css: "" },
+  { id: 2, name: 'Giant Herta', key: 'giantHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "giant-herta" },
+  { id: 3, name: 'Floating Herta', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
+  { id: 4, name: 'Screen Saver Herta', key: 'screenSaverHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
 ]);
 const upgrades = reactive<IShopItem[]>([
-  { id: 1, name: 'Relics', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 2, name: 'Hammer', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 3, name: '~kururing bonus', price: 10, cps: 1, emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
+  { id: 1, name: 'Relics', key: 'spiningHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
+  { id: 2, name: 'Hammer', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
+  { id: 3, name: '~kururing bonus', key: 'giantHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
 ]);
 
 
@@ -50,12 +57,12 @@ const upgrades = reactive<IShopItem[]>([
     <div v-if="shopActive">
       <h2 class="title">Shop</h2>
       <div class="grid-container">
-        <button v-for="item in items" :key="item.id" class="grid-item" @click="buyItem(item)">
+        <button v-for="item in items" :key="item.id" class="grid-item" @click="buyItem(item.key)">
           <div>
             <h2>{{ item.name }}</h2>
-            <p>Price {{ item.price }}</p>
+            <!-- <p>Price {{ item.price }}</p>
             <p>Cps {{ item.cps }}</p>
-            <p>Level {{ item.cps }}</p>
+            <p>Level {{ item.cps }}</p> -->
           </div>
           <div :class="WrapperDiv(item?.wrapperDiv)">
             <img :class="`image-size ${item.css}`" :src="item.src" />
@@ -68,9 +75,9 @@ const upgrades = reactive<IShopItem[]>([
       <div class="grid-container">
         <button v-for="item in upgrades" :key="item.id" class="grid-item" @click="buyItem(item)">
           <h2>{{ item.name }}</h2>
-          <p>Price {{ item.price }}</p>
+          <!-- <p>Price {{ item.price }}</p>
           <p>Cps {{ item.cps }}</p>
-          <p>Level {{ item.cps }}</p>
+          <p>Level {{ item.cps }}</p> -->
           <img class="image-size" :src="item.src" />
         </button>
       </div>

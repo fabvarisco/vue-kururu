@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { supabase } from './supabase'
 import Game from './views/Game.vue';
 import Home from './views/Home.vue';
@@ -19,14 +19,26 @@ onMounted(() => {
 
 const isLogged = ref<boolean>(false);
 
-
 const player: IPlayer = {
   username: "",
   coins: 0,
   cps: 0,
   dps: 0,
   idps: "",
-  shopItens: {},
+  shopItems: {
+    spiningHerta: {
+      count: 0, cps: 1, level: 0, name: 'Spining Herta', price: 10
+    },
+    giantHerta: {
+      count: 0, cps: 1, level: 0, name: 'Giant Herta', price: 10
+    },
+    floatingHerta: {
+      count: 0, cps: 1, level: 0, name: 'Floating Herta', price: 10
+    },
+    screenSaverHerta: {
+      count: 0, cps: 1, level: 0, name: 'Screen Saver Herta', price: 10
+    },
+  },
   upgrades: {},
   skills: {}
 }

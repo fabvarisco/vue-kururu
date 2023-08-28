@@ -34,13 +34,14 @@ const hertaList = ref<any[]>([])
 
 let coinsInterval: any = 0;
 
-function buyItem(item: any): void {
-  console.log(item.price)
+function buyItem(itemKey: shopItemKey): void {
+  const item = player.shopItems[itemKey];
   if (player.coins >= item.price) {
     player.coins -= item.price;
     switch (item.name) {
       case "Spining Herta":
         hertaSpining.value++;
+        item.count++;
         player.cps += item.cps
         break;
       case "Floating Herta":
@@ -111,6 +112,7 @@ onUnmounted(() => clearInterval(coinsInterval))
         <div style="display: flex; justify-content: center; font-size: 28px;">
           <h6 style="padding:16px">cps: {{ player.cps }} </h6>
         </div>
+        <div>{{ player.shopItems.spiningHerta.count}}</div>
       </div>
       <button @click="kururing()" style="all:unset; cursor: pointer;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset" />
@@ -118,7 +120,7 @@ onUnmounted(() => clearInterval(coinsInterval))
       </button>
     </section>
     <section class="kururu-container ">
-      <Shop @buyItem="buyItem" />
+      <Shop @buyItem="buyItem" :playerShopItems="player.shopItems" />
     </section>
   </section>
 </template>
