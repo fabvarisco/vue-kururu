@@ -34,38 +34,25 @@ const hertaList = ref<any[]>([])
 
 let coinsInterval: any = 0;
 
+function levelUpItem(item: Item) {
+  item.level++;
+  player.cps += item.cps;
+  item.cps *= item.level;
+  item.price *= item.level;
+}
+
 function buyItem(itemKey: shopItemKey): void {
   const item = player.shopItems[itemKey];
   if (player.coins >= item.price) {
     player.coins -= item.price;
-    switch (item.name) {
-      case "Spining Herta":
-        hertaSpining.value++;
-        item.count++;
-        player.cps += item.cps
-        break;
-      case "Floating Herta":
-        hertaFloat.value++;
-        player.cps += item.cps
-        break;
-      case "Giant Herta":
-        hertaGiant.value++;
-        player.cps += item.cps
-        break;
-      case "Screen Saver Herta":
-        hertaScreenSaver.value++;
-        player.cps += item.cps
-        break;
-    }
+    levelUpItem(item);
   }
 }
 
 function hertaReset(): void {
   hertaAttack.value = false;
 }
-function shakeReset(): void {
-  shaking.value = false;
-}
+
 function floatTextReset(): void {
   showFloatingText.value = false;
 }
@@ -112,7 +99,6 @@ onUnmounted(() => clearInterval(coinsInterval))
         <div style="display: flex; justify-content: center; font-size: 28px;">
           <h6 style="padding:16px">cps: {{ player.cps }} </h6>
         </div>
-        <div>{{ player.shopItems.spiningHerta.count}}</div>
       </div>
       <button @click="kururing()" style="all:unset; cursor: pointer;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset" />

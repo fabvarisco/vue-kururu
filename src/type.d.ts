@@ -5,7 +5,6 @@ type Item = {
   cps: number
   level: number
   price: number
-  count: number
 }
 
 interface IHertaComponent {

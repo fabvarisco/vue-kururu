@@ -27,16 +27,16 @@ const player: IPlayer = {
   idps: "",
   shopItems: {
     spiningHerta: {
-      count: 0, cps: 1, level: 0, name: 'Spining Herta', price: 10
+      cps: 1, level: 0, name: 'Spining Herta', price: 10
     },
     giantHerta: {
-      count: 0, cps: 1, level: 0, name: 'Giant Herta', price: 10
+      cps: 1, level: 0, name: 'Giant Herta', price: 10
     },
     floatingHerta: {
-      count: 0, cps: 1, level: 0, name: 'Floating Herta', price: 10
+      cps: 1, level: 0, name: 'Floating Herta', price: 10
     },
     screenSaverHerta: {
-      count: 0, cps: 1, level: 0, name: 'Screen Saver Herta', price: 10
+      cps: 1, level: 0, name: 'Screen Saver Herta', price: 10
     },
   },
   upgrades: {},

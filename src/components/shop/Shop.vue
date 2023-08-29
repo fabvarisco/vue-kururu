@@ -60,9 +60,9 @@ const upgrades = reactive<IShopItem[]>([
         <button v-for="item in items" :key="item.id" class="grid-item" @click="buyItem(item.key)">
           <div>
             <h2>{{ item.name }}</h2>
-            <!-- <p>Price {{ item.price }}</p>
-            <p>Cps {{ item.cps }}</p>
-            <p>Level {{ item.cps }}</p> -->
+            <p>Price {{ playerShopItems[item.key].price }}</p>
+            <p>Cps {{ playerShopItems[item.key].cps }}</p>
+            <p>Level {{ playerShopItems[item.key].level }}</p>
           </div>
           <div :class="WrapperDiv(item?.wrapperDiv)">
             <img :class="`image-size ${item.css}`" :src="item.src" />
@@ -73,7 +73,7 @@ const upgrades = reactive<IShopItem[]>([
     <div v-if="upgradesActive">
       <h2 class="title">Upgrades</h2>
       <div class="grid-container">
-        <button v-for="item in upgrades" :key="item.id" class="grid-item" @click="buyItem(item)">
+        <button v-for="item in upgrades" :key="item.id" class="grid-item" @click="buyItem(item.key)">
           <h2>{{ item.name }}</h2>
           <!-- <p>Price {{ item.price }}</p>
           <p>Cps {{ item.cps }}</p>
