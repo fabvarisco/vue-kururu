@@ -8,9 +8,12 @@ import GiantHerta from '../components/herta/GiantHerta.vue';
 import FloatingText from "../components/utils/FloatingText.vue";
 import ScreenSaverHerta from '../components/herta/ScreenSaverHerta.vue';
 import HertaFloating from '../components/herta/HertaFloating.vue';
+import type { Session } from '@supabase/supabase-js';
+import { supabase } from '@/supabase';
 
 interface Props {
   player: IPlayer
+  session: Session;
 }
 
 const props = defineProps<Props>()
@@ -70,10 +73,17 @@ function kururing(): void {
   createHerta()
 }
 
+async function getCurrentUser() {
+    const localUser = await supabase.auth.getSession();
+    console.log(localUser)
+}
+
+
 onMounted(() => {
   coinsInterval = setInterval(() => {
     player.coins += player.cps;
   }, 1000);
+  getCurrentUser();
 })
 
 onUnmounted(() => clearInterval(coinsInterval))

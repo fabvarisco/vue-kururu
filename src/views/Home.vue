@@ -10,31 +10,56 @@ interface IUser {
 }
 
 const isNewAccount = ref<boolean>(true);
+const loading = ref<boolean>(false);
+const error = ref<boolean>(false);
+
+
 
 const user = ref<IUser>({ username: '', email: '', password: '' })
 
 async function CreateAccount() {
     console.log(user)
-    const { data, error } = await supabase.auth.signUp({
-        email: user.value.email,
-        password: user.value.password
-    })
-    console.log(data)
-    console.log(error)
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email: user.value.email,
+            password: user.value.password
+        })
+        console.log(data)
+        console.log(error)
+    } catch (err) {
+        console.error(err);
+        error.value = true;
+    } finally {
+        loading.value = false;
+    }
 }
 
 async function Login() {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    loading.value = true
+    await supabase.auth.signInWithPassword({
         email: user.value.email,
         password: user.value.password
+    }).then((data) => {
+        console.log(data)
+
+    }).catch(err => {
+        console.log(err)
+        error.value = true;
+
+    }).finally(() => {
+        loading.value = false;
     })
-    console.log(data)
-    console.log(error)
+
 }
 
 async function getCurrentUser() {
-    const localUser = await supabase.auth.getSession();
-    console.log(localUser)
+    await supabase.auth.getSession().then((localUser) => {
+        console.log(localUser)
+    }).catch(() => {
+
+    }).finally(() => {
+
+    });
 }
 
 </script>
@@ -49,10 +74,10 @@ async function getCurrentUser() {
                 <div class="kururu-container" v-if="isNewAccount">
                     <div>login</div>
                     <label>Email:</label>
-                    <input type="email" name="email" v-model="user.email"/>
+                    <input type="email" name="email" v-model="user.email" />
 
                     <label>Password: </label>
-                    <input type="password" v-model="user.password"/>
+                    <input type="password" v-model="user.password" />
                     <div>
                         <button type="submit">Login</button>
                         <button @click="isNewAccount = false">Create Account</button>
@@ -71,7 +96,7 @@ async function getCurrentUser() {
                     <label>Password: </label>
                     <input type="password" v-model="user.password" />
                     <label>Confirm Password: </label>
-                    <input type="password"/>
+                    <input type="password" />
                     <div>
                         <button type="submit">Create Account</button>
                         <button @click="isNewAccount = true">Back</button>
