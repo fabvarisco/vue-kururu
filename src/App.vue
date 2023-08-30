@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { supabase } from './supabase'
 import Game from './views/Game.vue';
 import Home from './views/Home.vue';
+import Loading from './components/Loading.vue';
 
 const session = ref()
 const player = ref<IPlayer>({
@@ -70,9 +71,10 @@ const isLogged = ref<boolean>(false);
 
 <template>
   <main>
-    <Game v-if="session" :session="session" :player="player" />
-    <Home v-else />
+    <!-- <Game v-if="session" :session="session" :player="player" />
+    <Home v-else /> -->
     <!-- <Game :player="player" /> -->
+    <Loading />
   </main>
 </template>
 
