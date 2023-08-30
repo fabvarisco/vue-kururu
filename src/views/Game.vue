@@ -25,11 +25,6 @@ const showFloatingText = ref<boolean>(false)
 const hammer = ref<number>(0)
 const herta = ref<number>(0)
 
-const hertaSpining = ref<number>(0)
-const hertaFloat = ref<number>(0)
-const hertaGiant = ref<number>(0)
-const hertaScreenSaver = ref<number>(0)
-
 const hertaList = ref<any[]>([])
 
 let coinsInterval: any = 0;
@@ -88,10 +83,10 @@ onUnmounted(() => clearInterval(coinsInterval))
 <template>
   <section class="kururu-game">
     <div style="position: absolute;">
-      <HertaSpining v-for="el in hertaSpining" />
-      <ScreenSaverHerta v-for="el in hertaScreenSaver" />
-      <HertaFloating v-for="el in hertaFloat" />
-      <GiantHerta v-if="hertaGiant >= 1" />
+      <HertaSpining v-for="el in player.shopItems.spiningHerta.level" />
+      <ScreenSaverHerta v-for="el in player.shopItems.screenSaverHerta.level" />
+      <HertaFloating v-for="el in player.shopItems.floatingHerta.level" />
+      <GiantHerta v-if="player.shopItems.giantHerta.level >= 1" />
     </div>
     <section class="kururu-container" style="border: solid 1px;">
       <div class="kurukuru-count">
