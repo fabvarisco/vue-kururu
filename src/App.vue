@@ -5,6 +5,8 @@ import Game from './views/Game.vue';
 import Home from './views/Home.vue';
 import Loading from './components/Loading.vue';
 
+const loading = ref<boolean>(false);
+
 const session = ref()
 const player = ref<IPlayer>({
   username: "",
@@ -70,11 +72,12 @@ const isLogged = ref<boolean>(false);
 </script>
 
 <template>
-  <main>
-    <!-- <Game v-if="session" :session="session" :player="player" />
-    <Home v-else /> -->
-    <!-- <Game :player="player" /> -->
+  <main v-if="loading">
     <Loading />
+  </main>
+  <main v-else>
+    <Game v-if="session && player" :session="session" :player="player" />
+    <Home v-else />
   </main>
 </template>
 

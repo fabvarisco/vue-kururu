@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Loading from '@/components/Loading.vue';
 import { supabase } from '../supabase'
 import type { User } from '@supabase/supabase-js';
 import { ref, onUpdated } from 'vue';
@@ -68,7 +69,7 @@ async function getCurrentUser() {
     <header class="kururing-title">
         <h1>Kururidle</h1>
     </header>
-    <section class="kururu-main">
+    <section class="kururu-main" v-if="!loading">
         <section>
             <form @submit.prevent="Login">
                 <div class="kururu-container" v-if="isNewAccount">
@@ -101,11 +102,13 @@ async function getCurrentUser() {
                         <button type="submit">Create Account</button>
                         <button @click="isNewAccount = true">Back</button>
                         <button @click="getCurrentUser()">Back</button>
-
                     </div>
                 </div>
             </form>
         </section>
+    </section>
+    <section v-else>
+        <Loading />
     </section>
 </template>
 
