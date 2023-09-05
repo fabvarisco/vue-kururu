@@ -10,19 +10,20 @@ import ScreenSaverHerta from '../components/herta/ScreenSaverHerta.vue';
 import HertaFloating from '../components/herta/HertaFloating.vue';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '@/supabase';
+import Loading from '@/components/Loading.vue';
 
 interface Props {
   player: IPlayer
   session: Session;
 }
 
-const props = defineProps<Props>()
-
-const player = reactive<IPlayer>(props.player)
-const dps = ref<number>(1)
-const hertaAttack = ref<boolean>(false)
-const shaking = ref<boolean>(false)
-const showFloatingText = ref<boolean>(false)
+const props = defineProps<Props>();
+const loading = ref<boolean>(false);
+const player = reactive<IPlayer>(props.player);
+const dps = ref<number>(1);
+const hertaAttack = ref<boolean>(false);
+const shaking = ref<boolean>(false);
+const showFloatingText = ref<boolean>(false);
 
 //Inventory 
 const hammer = ref<number>(0)
@@ -74,8 +75,8 @@ function kururing(): void {
 }
 
 async function getCurrentUser() {
-    const localUser = await supabase.auth.getSession();
-    console.log(localUser)
+  const localUser = await supabase.auth.getSession();
+  console.log(localUser)
 }
 
 
@@ -91,7 +92,7 @@ onUnmounted(() => clearInterval(coinsInterval))
 </script>
 
 <template>
-  <section class="kururu-game">
+  <section v-if="!loading" class="kururu-game">
     <div style="position: absolute;">
       <HertaSpining v-for="el in player.shopItems.spiningHerta.level" />
       <ScreenSaverHerta v-for="el in player.shopItems.screenSaverHerta.level" />
@@ -105,7 +106,7 @@ onUnmounted(() => clearInterval(coinsInterval))
           <h6 style="padding:16px">cps: {{ player.cps }} </h6>
         </div>
       </div>
-      <button @click="kururing()" style="all:unset; cursor: pointer;">
+      <button @click="kururing()" style="all: unset;">
         <FloatingText :value="showFloatingText" @floatTextReset="floatTextReset" />
         <Herta :value="hertaAttack" @hertaReset="hertaReset" />
       </button>
@@ -113,6 +114,9 @@ onUnmounted(() => clearInterval(coinsInterval))
     <section class="kururu-container ">
       <Shop @buyItem="buyItem" :playerShopItems="player.shopItems" />
     </section>
+  </section>
+  <section v-else>
+    <Loading />
   </section>
 </template>
 
