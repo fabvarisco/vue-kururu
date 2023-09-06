@@ -14,7 +14,29 @@ const isNewAccount = ref<boolean>(true);
 const loading = ref<boolean>(false);
 const error = ref<boolean>(false);
 
-
+const player: IPlayer = {
+    username: "",
+    coins: 0,
+    cps: 0,
+    dps: 0,
+    idps: "",
+    shopItems: {
+        spiningHerta: {
+            cps: 1, level: 0, name: 'Spining Herta', price: 10
+        },
+        giantHerta: {
+            cps: 1, level: 0, name: 'Giant Herta', price: 10
+        },
+        floatingHerta: {
+            cps: 1, level: 0, name: 'Floating Herta', price: 10
+        },
+        screenSaverHerta: {
+            cps: 1, level: 0, name: 'Screen Saver Herta', price: 10
+        },
+    },
+    upgrades: {},
+    skills: {}
+}
 
 const user = ref<IUser>({ username: '', email: '', password: '' })
 
@@ -41,8 +63,7 @@ async function Login() {
         email: user.value.email,
         password: user.value.password
     }).then((data) => {
-        console.log(data)
-
+        supabase.from('users').upsert({...player })
     }).catch(err => {
         console.log(err)
         error.value = true;

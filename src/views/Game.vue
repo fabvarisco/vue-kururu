@@ -93,7 +93,6 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 <template>
   <section v-if="!loading" class="kururu-game">
-    
     <div style="position: absolute;">
       <HertaSpining v-for="el in player.shopItems.spiningHerta.level" />
       <ScreenSaverHerta v-for="el in player.shopItems.screenSaverHerta.level" />
