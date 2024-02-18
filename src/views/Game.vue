@@ -75,8 +75,7 @@ function kururing(): void {
 }
 
 async function getCurrentUser() {
-  const localUser = await supabase.auth.getSession();
-  console.log(localUser)
+  const localUser = await supabase.auth.getSession();  console.log(localUser)
 }
 
 
