@@ -12,17 +12,17 @@
     position: absolute;
     z-index: 10000;
     animation: moveImage 10s infinite;
-    left: 0;
-    transform: translate(-100%,100%);
+    left: 0;    
+    transform: translate(100%,50%);
 }
 
 @keyframes moveImage {
     0% {
-        transform: translate(-100vw,100%);
+        transform: translate(-100vw,50%);
     }
 
     100% {
-        transform: translate(100vw,100%);
+        transform: translate(100vw,50%);
     }
 }
 </style>

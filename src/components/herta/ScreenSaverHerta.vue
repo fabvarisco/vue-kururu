@@ -1,11 +1,3 @@
-<script setup lang="ts">
-const maxX = Math.random() * window.innerWidth;
-const maxY = Math.random() * window.innerHeight;
-const x = maxX + "px";
-const y = maxY + "px";
-
-</script>
-
 <template>
     <div class="herta-screen-x">
         <img src="../../assets/herta-stuff/herta.png" class="herta-screen-y" />
@@ -20,23 +12,23 @@ img {
 
 .herta-screen-x {
     position: absolute;
-    animation: herta-screen-x 20s linear infinite ;
+    animation: herta-screen-x 13s infinite alternate ;
 }
 
 .herta-screen-y {
-    animation: herta-screen-y 20s linear infinite ;
+    animation: herta-screen-y 7s infinite alternate ;
 }
 
 
 @keyframes herta-screen-x {
     100% {
-        transform: translateX(v-bind(x));
+        transform: translateX(calc(100vw - 100px));
     }
 }
 
 @keyframes herta-screen-y {
     100% {
-        transform: translateY(calc(100vh - v-bind(y)));
+        transform: translateY(calc(100vh - 100px));
     }
 }
 </style>

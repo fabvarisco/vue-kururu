@@ -42,11 +42,6 @@ onMounted(() => {
   })
 })
 
-
-const isLogged = ref<boolean>(false);
-
-
-
 </script>
 
 <template>
