@@ -58,8 +58,7 @@ async function CreateAccount() {
       email: user.value.email,
       password: user.value.password
     })
-    console.log(data)
-    console.log(error)
+    supabase.from('users').insert({ ...player })
   } catch (err) {
     console.error(err)
     error.value = true
