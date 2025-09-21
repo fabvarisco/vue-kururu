@@ -8,7 +8,6 @@ function randomizePosition() {
   position.value.x = Math.random() * (window.innerWidth - 100) + "px"
   position.value.y = Math.random() * (window.innerHeight - 100) + "px"
 
-  console.log(position)
 }
 
 onMounted(() => {

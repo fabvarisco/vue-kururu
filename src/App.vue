@@ -1,13 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-// import { supabase } from './supabase'
+import { ref } from 'vue'
 import Game from './views/Game.vue'
-import Home from './views/Home.vue'
-import Loading from './components/Loading.vue'
 
-const loading = ref<boolean>(false)
-
-const session = ref()
 const player = ref<IPlayer>({
   username: '',
   coins: 0,
@@ -42,17 +36,6 @@ const player = ref<IPlayer>({
   },
 })
 
-// onMounted(() => {
-//   supabase.auth.getSession().then(({ data }) => {
-//     session.value = data.session
-//     console.log(data.session)
-//   })
-
-//   supabase.auth.onAuthStateChange((_, _session) => {
-//     session.value = _session
-//     console.log(_session)
-//   })
-// })
 </script>
 
 <template>

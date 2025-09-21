@@ -8,26 +8,17 @@ import GiantHerta from '../components/herta/GiantHerta.vue';
 import FloatingText from "../components/utils/FloatingText.vue";
 import ScreenSaverHerta from '../components/herta/ScreenSaverHerta.vue';
 import HertaFloating from '../components/herta/HertaFloating.vue';
-// import type { Session } from '@supabase/supabase-js';
-// import { supabase } from '@/supabase';
-import Loading from '@/components/Loading.vue';
 
 interface Props {
   player: IPlayer
-  // session: Session;
 }
 
 const props = defineProps<Props>();
-const loading = ref<boolean>(false);
 const player = reactive<IPlayer>(props.player);
-const dps = ref<number>(1);
 const hertaAttack = ref<boolean>(false);
 const shaking = ref<boolean>(false);
 const showFloatingText = ref<boolean>(false);
 
-//Inventory 
-const hammer = ref<number>(0)
-const herta = ref<number>(0)
 
 const hertaList = ref<any[]>([])
 
@@ -74,17 +65,12 @@ function kururing(): void {
   createHerta()
 }
 
-async function getCurrentUser() {
-  // const localUser = await supabase.auth.getSession();  
-  // console.log(localUser)
-}
 
 
 onMounted(() => {
   coinsInterval = setInterval(() => {
     player.coins += player.cps;
   }, 1000);
-  getCurrentUser();
 })
 
 onUnmounted(() => clearInterval(coinsInterval))
@@ -92,7 +78,7 @@ onUnmounted(() => clearInterval(coinsInterval))
 </script>
 
 <template>
-  <section v-if="!loading" class="kururu-game">
+  <section class="kururu-game">
     <div style="position: absolute;">
       <HertaSpining v-for="el in player.shopItems.spiningHerta.level" />
       <ScreenSaverHerta v-for="el in player.shopItems.screenSaverHerta.level" />
@@ -114,9 +100,6 @@ onUnmounted(() => clearInterval(coinsInterval))
     <section class="kururu-container ">
       <Shop @buyItem="buyItem" :playerShopItems="player.shopItems" />
     </section>
-  </section>
-  <section v-else>
-    <Loading />
   </section>
 </template>
 
