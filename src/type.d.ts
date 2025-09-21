@@ -38,6 +38,4 @@ interface IPlayer {
   dps: number
   idps: string
   shopItems: IPlayerShopItems
-  upgrades: object
-  skills: object
 }

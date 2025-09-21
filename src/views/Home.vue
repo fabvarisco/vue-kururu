@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Loading from '@/components/Loading.vue'
-import { supabase } from '../supabase'
+// import { supabase } from '../supabase'
 import type { User } from '@supabase/supabase-js'
 import { ref, onUpdated } from 'vue'
 
@@ -46,63 +46,61 @@ const player: IPlayer = {
       price: 10
     }
   },
-  upgrades: {},
-  skills: {}
 }
 
 const user = ref<IUser>({ username: '', email: '', password: '' })
 
-async function CreateAccount() {
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email: user.value.email,
-      password: user.value.password
-    })
-    supabase.from('users').insert({ ...player })
-  } catch (err) {
-    console.error(err)
-    error.value = true
-  } finally {
-    loading.value = false
-  }
-}
+// async function CreateAccount() {
+//   try {
+//     const { data, error } = await supabase.auth.signUp({
+//       email: user.value.email,
+//       password: user.value.password
+//     })
+//     supabase.from('users').insert({ ...player })
+//   } catch (err) {
+//     console.error(err)
+//     error.value = true
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
-async function Login() {
-  loading.value = true
-  await supabase.auth
-    .signInWithPassword({
-      email: user.value.email,
-      password: user.value.password
-    })
-    .then((data) => {
-      console.log(data)
-      const a = supabase.from('users').upsert({ ...player })
-      console.log(a)
-    })
-    .catch((err) => {
-      console.log(err)
-      error.value = true
-    })
-    .finally(() => {
-      loading.value = false
-    })
+// async function Login() {
+//   loading.value = true
+//   await supabase.auth
+//     .signInWithPassword({
+//       email: user.value.email,
+//       password: user.value.password
+//     })
+//     .then((data) => {
+//       console.log(data)
+//       const a = supabase.from('users').upsert({ ...player })
+//       console.log(a)
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//       error.value = true
+//     })
+//     .finally(() => {
+//       loading.value = false
+//     })
 
-  const { data } = await supabase.auth.getUser()
-  console.log(data)
+//   const { data } = await supabase.auth.getUser()
+//   console.log(data)
 
-  const teste = await supabase.from('user').select('id, cps')
-  console.log(teste)
-}
+//   const teste = await supabase.from('user').select('id, cps')
+//   console.log(teste)
+// }
 
-async function getCurrentUser() {
-  await supabase.auth
-    .getSession()
-    .then((localUser) => {
-      console.log(localUser)
-    })
-    .catch(() => {})
-    .finally(() => {})
-}
+// async function getCurrentUser() {
+//   await supabase.auth
+//     .getSession()
+//     .then((localUser) => {
+//       console.log(localUser)
+//     })
+//     .catch(() => {})
+//     .finally(() => {})
+// }
 </script>
 
 <template>

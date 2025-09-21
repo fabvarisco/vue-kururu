@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, defineComponent } from 'vue';
+import { ref, reactive } from 'vue';
 interface Props {
   playerShopItems: IPlayerShopItems
 }
@@ -9,23 +9,9 @@ const props = defineProps<Props>()
 
 const emit = defineEmits(['buyItem'])
 
-const shopActive = ref<boolean>(true);
-const upgradesActive = ref<boolean>(false);
-
-
 function WrapperDiv(wrapper: string | undefined): string {
 
   return wrapper ? wrapper : ""
-}
-
-function openShop(): void {
-  shopActive.value = true;
-  upgradesActive.value = false;
-
-}
-function openUpgrades(): void {
-  upgradesActive.value = true;
-  shopActive.value = false;
 }
 
 function buyItem(itemKey: shopItemKey) {
@@ -39,22 +25,12 @@ const items = reactive<IShopItem[]>([
   { id: 3, name: 'Floating Herta', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
   { id: 4, name: 'Screen Saver Herta', key: 'screenSaverHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
 ]);
-const upgrades = reactive<IShopItem[]>([
-  { id: 1, name: 'Relics', key: 'spiningHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 2, name: 'Hammer', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-  { id: 3, name: '~kururing bonus', key: 'giantHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/hammer.png", css: "" },
-]);
-
 
 </script>
 
 <template >
   <div class="shop-container">
-    <div class="header">
-      <button @click="openShop">Shop</button>
-      <button @click="openUpgrades">Upgrades</button>
-    </div>
-    <div v-if="shopActive">
+    <div>
       <h2 class="title">Shop</h2>
       <div class="grid-container">
         <button v-for="item in items" :key="item.id" class="grid-item" @click="buyItem(item.key)">
@@ -70,31 +46,16 @@ const upgrades = reactive<IShopItem[]>([
         </button>
       </div>
     </div>
-    <div v-if="upgradesActive">
-      <h2 class="title">Upgrades</h2>
-      <div class="grid-container">
-        <button v-for="item in upgrades" :key="item.id" class="grid-item" @click="buyItem(item.key)">
-          <h2>{{ item.name }}</h2>
-          <!-- <p>Price {{ item.price }}</p>
-          <p>Cps {{ item.cps }}</p>
-          <p>Level {{ item.cps }}</p> -->
-          <img class="image-size" :src="item.src" />
-        </button>
-      </div>
-    </div>
   </div>
 </template>
 <style scoped>
 .shop-container {
+  padding: 12px;
   width: 100%;
   height: 100%;
   background: grey;
 }
 
-.header {
-  display: flex;
-  justify-content: start;
-}
 
 .image-size {
   height: 80px;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { supabase } from './supabase'
+// import { supabase } from './supabase'
 import Game from './views/Game.vue'
 import Home from './views/Home.vue'
 import Loading from './components/Loading.vue'
@@ -40,30 +40,24 @@ const player = ref<IPlayer>({
       price: 10
     }
   },
-  upgrades: {},
-  skills: {}
 })
 
-onMounted(() => {
-  supabase.auth.getSession().then(({ data }) => {
-    session.value = data.session
-    console.log(data.session)
-  })
+// onMounted(() => {
+//   supabase.auth.getSession().then(({ data }) => {
+//     session.value = data.session
+//     console.log(data.session)
+//   })
 
-  supabase.auth.onAuthStateChange((_, _session) => {
-    session.value = _session
-    console.log(_session)
-  })
-})
+//   supabase.auth.onAuthStateChange((_, _session) => {
+//     session.value = _session
+//     console.log(_session)
+//   })
+// })
 </script>
 
 <template>
-  <main v-if="loading">
-    <Loading />
-  </main>
-  <main v-else>
-    <Game v-if="session && player" :session="session" :player="player" />
-    <Home v-else />
+  <main>
+    <Game  :player="player" />
   </main>
 </template>
 

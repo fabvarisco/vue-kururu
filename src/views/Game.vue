@@ -8,13 +8,13 @@ import GiantHerta from '../components/herta/GiantHerta.vue';
 import FloatingText from "../components/utils/FloatingText.vue";
 import ScreenSaverHerta from '../components/herta/ScreenSaverHerta.vue';
 import HertaFloating from '../components/herta/HertaFloating.vue';
-import type { Session } from '@supabase/supabase-js';
-import { supabase } from '@/supabase';
+// import type { Session } from '@supabase/supabase-js';
+// import { supabase } from '@/supabase';
 import Loading from '@/components/Loading.vue';
 
 interface Props {
   player: IPlayer
-  session: Session;
+  // session: Session;
 }
 
 const props = defineProps<Props>();
@@ -75,7 +75,8 @@ function kururing(): void {
 }
 
 async function getCurrentUser() {
-  const localUser = await supabase.auth.getSession();  console.log(localUser)
+  // const localUser = await supabase.auth.getSession();  
+  // console.log(localUser)
 }
 
 
