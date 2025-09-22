@@ -52,37 +52,19 @@ watch(
 
 <template>
     <div class="herta-container">
-        <img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="herta-position herta-gif herta-none"
+        <img src="../../assets/herta-stuff/herta.gif" alt="KURURING!" class=" herta-none"
             id="herta-gif" />
-        <img src="../assets/herta stuff/herta.png" alt="KURURING!" class="herta-position herta-png herta-block"
+        <img src="../../assets/herta-stuff/herta.png" alt="KURURING!" class=" herta-block"
             id="herta-png" />
     </div>
 </template>
 
 <style scoped>
-.herta-button {
-    all: unset;
-}
-
 .herta-container {
-    position: fixed;
-    top: 63%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    scale: .6;
+    scale: .4;
+    transform: scaleX(-1);
 }
 
-.herta-position {
-    object-fit: contain;
-}
-
-.herta-gif {
-    transform: translate(-50%, -60%);
-}
-
-.herta-png {
-    transform: translate(-50%, -50%);
-}
 
 .herta-block {
     display: block;

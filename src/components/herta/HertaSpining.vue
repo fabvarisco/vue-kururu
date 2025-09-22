@@ -8,13 +8,13 @@ const position = reactive<{ x: string, y: string }>({ x: "", y: "" });
 onMounted(() => {
     size.value = Math.random() * 200 + "px";
     position.x = Math.random() * window.innerHeight + "px";
-    position.x = Math.random() * window.innerWidth + "px";
+    position.y = Math.random() * 500 + "px";
 })
 
 </script>
 
 <template>
-    <span><img src="../assets/herta stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
+    <span><img src="../../assets/herta-stuff/herta.gif" alt="KURURING!" class="kururu-spining" /></span>
 </template>
 
 
