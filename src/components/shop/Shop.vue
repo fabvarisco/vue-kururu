@@ -93,7 +93,6 @@ const items = reactive<IShopItem[]>([
 }
 
 .grid-item p {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-weight: bold;
   text-align: left;
 }
