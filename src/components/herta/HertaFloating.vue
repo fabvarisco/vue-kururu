@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const y = Math.random() * window.innerHeight + "px";
-
+const animation_time = Math.random() * 5 + 5 + "s";
 </script>
 
 <template>
@@ -16,8 +16,7 @@ const y = Math.random() * window.innerHeight + "px";
     position: absolute;
     top: v-bind(y);
     width: 100px;
-    animation: rotation 5s infinite;
-
+    animation: rotation v-bind(animation_time) infinite;
 }
 
 @keyframes moveImage {
