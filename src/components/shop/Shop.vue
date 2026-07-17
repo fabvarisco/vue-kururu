@@ -68,7 +68,7 @@ const items = reactive<IShopItem[]>([
   margin: 10px;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, 1fr);
   gap: 4px;
   border-radius: 5px;
@@ -155,6 +155,82 @@ img {
 @keyframes herta-screen-y {
   100% {
     transform: translateY(calc(100px - 20px));
+  }
+}
+
+/* Mobile portrait: compact cards so the whole shop fits below the game without page scroll */
+@media (max-width: 768px) and (orientation: portrait) {
+  .shop-container {
+    padding: 4px 8px;
+    max-height: 50vh;
+    max-height: 50svh;
+    overflow-y: auto;
+  }
+
+  .title {
+    margin: 0 0 0 8px;
+    font-size: 1.1rem;
+  }
+
+  .grid-container {
+    margin: 0;
+    padding: 4px;
+  }
+
+  .grid-item {
+    height: auto;
+    min-height: 110px;
+    min-width: 0;
+    padding: 6px;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .grid-item h2 {
+    font-size: 0.85rem;
+  }
+
+  .grid-item p {
+    font-size: 0.7rem;
+  }
+
+  .image-size {
+    height: 48px;
+    width: 48px;
+    transform: none;
+  }
+
+  .giant-herta {
+    transform: scale(1.4);
+  }
+}
+
+/* Mobile landscape: page scroll is allowed, cards just need to shrink a bit */
+@media (orientation: landscape) and (max-height: 500px) {
+  .shop-container {
+    padding: 8px;
+  }
+
+  .grid-container {
+    margin: 4px;
+    padding: 6px;
+  }
+
+  .grid-item {
+    height: auto;
+    min-height: 160px;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .image-size {
+    height: 60px;
+    transform: none;
+  }
+
+  .giant-herta {
+    transform: scale(1.4);
   }
 }
 </style>

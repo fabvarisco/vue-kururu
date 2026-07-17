@@ -78,7 +78,7 @@ onUnmounted(() => clearInterval(coinsInterval))
 
 <template>
   <section class="kururu-game">
-    <div style="position: absolute;">
+    <div class="herta-stage">
       <HertaSpining v-for="el in player.shopItems.spiningHerta.level" />
       <ScreenSaverHerta v-for="el in player.shopItems.screenSaverHerta.level" />
       <HertaFloating v-for="el in player.shopItems.floatingHerta.level" />
@@ -111,6 +111,13 @@ onUnmounted(() => clearInterval(coinsInterval))
   width: 100vw;
 }
 
+.herta-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .kururu-container {
   padding: 20px;
   display: flex;
@@ -141,10 +148,59 @@ onUnmounted(() => clearInterval(coinsInterval))
   border: #392a64 solid 2px;
 }
 
-/* Media query for mobile devices */
-@media (max-width: 768px) {
+/* Mobile portrait: game + shop share one screen, no page scroll */
+@media (max-width: 768px) and (orientation: portrait) {
   .kururu-game {
     grid-template-columns: 1fr;
+    /* minmax(0, ...) lets the game row shrink below the click button's
+       layout size (the Herta img is full-size, only visually scaled down) */
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100vh;
+    height: 100svh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .kururu-container {
+    padding: 8px;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .kurukuru-count {
+    left: 50%;
+    top: 2%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 90vw;
+  }
+
+  .kurukuru-count h1 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobile landscape: full-screen game, scroll down to reach the shop */
+@media (orientation: landscape) and (max-height: 500px) {
+  .kururu-game {
+    grid-template-columns: 1fr;
+    grid-template-rows: 100vh auto;
+    grid-template-rows: 100svh auto;
+    height: auto;
+    width: 100%;
+  }
+
+  .kururu-container {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .kurukuru-count {
+    left: 50%;
+    top: 5%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 90vw;
   }
 }
 </style>
