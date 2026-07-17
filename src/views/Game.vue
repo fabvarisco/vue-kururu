@@ -27,8 +27,7 @@ let coinsInterval: any = 0;
 function levelUpItem(item: Item) {
   item.level++;
   player.cps += item.cps;
-  item.cps *= item.level;
-  item.price *= item.level;
+  item.price = Math.ceil(item.price * 1.15);
 }
 
 function buyItem(itemKey: shopItemKey): void {

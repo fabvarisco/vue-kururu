@@ -21,9 +21,9 @@ function buyItem(itemKey: shopItemKey) {
 
 const items = reactive<IShopItem[]>([
   { id: 1, name: 'Spining Herta', key: 'spiningHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.gif", css: "" },
-  { id: 2, name: 'Giant Herta', key: 'giantHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "giant-herta" },
-  { id: 3, name: 'Floating Herta', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
-  { id: 4, name: 'Screen Saver Herta', key: 'screenSaverHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
+  { id: 2, name: 'Floating Herta', key: 'floatingHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "floating-herta" },
+  { id: 3, name: 'Screen Saver Herta', key: 'screenSaverHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", wrapperDiv: 'herta-screen-x', css: "herta-screen herta-screen-y" },
+  { id: 4, name: 'Giant Herta', key: 'giantHerta', emitName: "hertaEvent", src: "./src/assets/herta-stuff/herta.png", css: "giant-herta" },
 ]);
 
 </script>

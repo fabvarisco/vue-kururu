@@ -13,25 +13,25 @@ const player = ref<IPlayer>({
       cps: 1,
       level: 0,
       name: 'Spining Herta',
-      price: 10
-    },
-    giantHerta: {
-      cps: 1,
-      level: 0,
-      name: 'Giant Herta',
-      price: 10
+      price: 15
     },
     floatingHerta: {
-      cps: 1,
+      cps: 5,
       level: 0,
       name: 'Floating Herta',
-      price: 10
+      price: 100
     },
     screenSaverHerta: {
-      cps: 1,
+      cps: 20,
       level: 0,
       name: 'Screen Saver Herta',
-      price: 10
+      price: 700
+    },
+    giantHerta: {
+      cps: 80,
+      level: 0,
+      name: 'Giant Herta',
+      price: 4000
     }
   },
 })
