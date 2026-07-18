@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import kururingMusic from '../../assets/audios/kururing_music.mp3';
 
 const disableAudio = ref<boolean>(false);
 
@@ -16,7 +17,7 @@ function ToggleMusic() {
 </script>
 
 <template>
-    <audio ref="audio" autoplay="true" src="src/assets/audios/kururing_music.mp3" loop id="audio" hidden></audio>
+    <audio ref="audio" autoplay="true" :src="kururingMusic" loop id="audio" hidden></audio>
     <button @click="ToggleMusic()">Toggle audio</button>
 </template>
 
